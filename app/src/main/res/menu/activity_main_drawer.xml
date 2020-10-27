@@ -17,9 +17,6 @@
             android:id="@+id/nav_Setting"
             android:icon="@drawable/ic_menu_slideshow"
             android:title="Setting" />
-        <item
-            android:id="@+id/displayMapsActivity"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="@string/menu_map" />
+
     </group>
 </menu>

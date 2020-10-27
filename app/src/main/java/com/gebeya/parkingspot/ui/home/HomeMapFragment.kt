@@ -37,26 +37,17 @@ class HomeMapFragment : Fragment(), OnMapReadyCallback, PermissionsListener {
     private val DEFAULT_MAX_WAIT_TIME = DEFAULT_INTERVAL_IN_MILLISECONDS * 5
     private var callback: HomeMapFragmentLocationCallback = HomeMapFragmentLocationCallback(this)
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         Mapbox.getInstance(requireContext(), getString(R.string.mapbox_access_token))
-
-
         val root = inflater.inflate(R.layout.fragment_home_map, container, false)
-
         return root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mapView.onCreate(savedInstanceState)
-        mapView.getMapAsync{
-            it.setStyle(Style.MAPBOX_STREETS)
-        }
+        mapView.getMapAsync(this)
     }
 
     override fun onMapReady(mapboxMap: MapboxMap) {
