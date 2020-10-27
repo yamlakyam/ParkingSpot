@@ -1,0 +1,39 @@
+<resources>
+
+    <string name="facebook_app_id">380874523283389</string>
+    <string name="fb_login_protocol_scheme">fb380874523283389</string>
+
+    <string name="app_name">ParkingSpot</string>
+    <string name="login_txtview">Login</string>
+    <string name="email_login">Email</string>
+    <string name="password_login">Password</string>
+    <string name="forget_password_link">Forget password</string>
+    <string name="login_btn">Login</string>
+    <string name="create_account_link">Create account </string>
+    <string name="or_signin_with_txtview"> or signin with</string>
+    <string name="create_account_txtview">Create Account</string>
+    <string name="name_create_acct">User Name</string>
+    <string name="phone_number_create_acct">Phone Number</string>
+    <string name="email_create_acct">Email</string>
+    <string name="password_create_acct">Password</string>
+    <string name="confirm_password_create_acct">Confirm Password</string>
+    <string name="create_account_btn">Create Account</string>
+    <string name="already_have_an_account_link">Already have an account</string>
+    <string name="forgot_password_txtview">Forgot Password</string>
+    <string name="email_forgot_pw">Email</string>
+    <string name="send_link_btn">Send Link</string>
+    <string name="title_activity_display_maps">Map</string>
+
+    <string name="title_activity_navigation_drawer">NavigationDrawerActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="mapbox_access_token">pk.eyJ1IjoieWFtbGFrIiwiYSI6ImNrZ2tucXBzNTA5MjcyeXBjY3c1Ym0xNnIifQ.b0PnhjN0K7jevMTXL8NX_g</string>
+
+   <!-- <string name="mapbox_access_token">MAPBOX_ACCESS_TOKEN</string>-->
+
+
+</resources>
