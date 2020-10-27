@@ -22,9 +22,9 @@
         android:name="com.gebeya.parkingspot.ui.slideshow.SlideshowFragment"
         android:label="Setting"
         tools:layout="@layout/fragment_slideshow" />
-    <fragment
-        android:id="@+id/nav_map"
-        android:name="com.gebeya.parkingspot.MapFragment"
-        android:label="fragment_map"
-        tools:layout="@layout/fragment_map" />
+    <activity
+        android:id="@+id/displayMapsActivity"
+        android:name="com.gebeya.parkingspot.DisplayMapsActivity"
+        android:label="activity_display_maps"
+        tools:layout="@layout/activity_display_maps" />
 </navigation>
