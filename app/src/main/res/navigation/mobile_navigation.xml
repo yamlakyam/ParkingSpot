@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.gebeya.parkingspot.ui.home.HomeMapFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home_map" />
+
+    <fragment
+        android:id="@+id/nav_history"
+        android:name="com.gebeya.parkingspot.ui.gallery.GalleryFragment"
+        android:label="History"
+        tools:layout="@layout/fragment_gallery" />
+
+    <fragment
+        android:id="@+id/nav_Setting"
+        android:name="com.gebeya.parkingspot.ui.slideshow.SlideshowFragment"
+        android:label="Setting"
+        tools:layout="@layout/fragment_slideshow" />
+    <fragment
+        android:id="@+id/nav_map"
+        android:name="com.gebeya.parkingspot.MapFragment"
+        android:label="fragment_map"
+        tools:layout="@layout/fragment_map" />
+</navigation>

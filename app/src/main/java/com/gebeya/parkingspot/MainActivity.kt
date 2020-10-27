@@ -70,7 +70,7 @@ class MainActivity : AppCompatActivity() {
                                 "Facebook login successful",
                                 Toast.LENGTH_LONG
                         ).show()
-                        val intent = Intent(this@MainActivity, DisplayMapsActivity::class.java)
+                        val intent = Intent(this@MainActivity, HomeActivity::class.java)
                         startActivity(intent)
 
                     }
@@ -122,7 +122,7 @@ class MainActivity : AppCompatActivity() {
                         Toast.makeText(this@MainActivity,"User Logged in successful ${response.body()!!.token}", Toast.LENGTH_LONG).show()
                         //toasted the token to check if its working.
 
-                        val intent = Intent(this@MainActivity, DisplayMapsActivity::class.java)
+                        val intent = Intent(this@MainActivity, HomeActivity::class.java)
                         startActivity(intent)
                         finish()
 
@@ -172,7 +172,7 @@ class MainActivity : AppCompatActivity() {
         try {
             val account = completedTask.getResult(ApiException::class.java)
             // Signed in successfully, show authenticated UI.
-            val intent = Intent(this@MainActivity, DisplayMapsActivity::class.java)
+            val intent = Intent(this@MainActivity, HomeActivity::class.java)
             startActivity(intent)
 
         } catch (e: ApiException) {
