@@ -2,9 +2,11 @@ package com.gebeya.parkingspot
 
 import android.content.Context
 import android.content.SharedPreferences
+import androidx.appcompat.app.AppCompatActivity
 
 class SessionManager(context: Context) {
-    private var pref:SharedPreferences= context.getSharedPreferences(context.getString(R.string.app_name),Context.MODE_PRIVATE)
+    val pref: SharedPreferences= context.getSharedPreferences(context.getString(R.string.app_name),Context.MODE_PRIVATE)
+    //val pref= getSharedPreferences(context.getString(R.string.app_name),Context.MODE_PRIVATE)
 
     companion object{
         const val USER_TOKEN = "user_token"
@@ -21,12 +23,7 @@ class SessionManager(context: Context) {
     //fun to fetch auth token
 
     fun fetchAuthToken():String?{
-        return pref.getString(USER_TOKEN,null)
-    }
-    /*
-    fun saveEmail(email:User){
-
+        return pref.getString(USER_TOKEN, " ")
     }
 
-     */
 }

@@ -1,5 +1,6 @@
 package com.gebeya.parkingspot.ui.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Looper
 import android.util.Log
@@ -8,13 +9,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.gebeya.parkingspot.R
+import com.gebeya.parkingspot.*
+import com.gebeya.parkingspot.Retrofit.MyService
+import com.gebeya.parkingspot.Retrofit.RetrofitClient
 import com.mapbox.android.core.location.*
 import com.mapbox.android.core.permissions.PermissionsListener
 import com.mapbox.android.core.permissions.PermissionsManager
+import com.mapbox.geojson.Feature
+import com.mapbox.geojson.FeatureCollection
+import com.mapbox.geojson.Point
 import com.mapbox.mapboxsdk.Mapbox
 import com.mapbox.mapboxsdk.geometry.LatLng
 import com.mapbox.mapboxsdk.location.LocationComponentActivationOptions
@@ -23,8 +30,18 @@ import com.mapbox.mapboxsdk.location.modes.RenderMode
 import com.mapbox.mapboxsdk.maps.MapboxMap
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback
 import com.mapbox.mapboxsdk.maps.Style
+import com.mapbox.mapboxsdk.style.layers.PropertyFactory.*
 import kotlinx.android.synthetic.main.fragment_home_map.*
 import java.lang.ref.WeakReference
+
+import com.mapbox.mapboxsdk.style.layers.SymbolLayer
+import com.mapbox.mapboxsdk.style.sources.GeoJsonSource
+import com.mapbox.mapboxsdk.utils.BitmapUtils
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+
 
 class HomeMapFragment : Fragment(), OnMapReadyCallback, PermissionsListener {
 
@@ -36,6 +53,15 @@ class HomeMapFragment : Fragment(), OnMapReadyCallback, PermissionsListener {
     private val DEFAULT_INTERVAL_IN_MILLISECONDS = 1000L
     private val DEFAULT_MAX_WAIT_TIME = DEFAULT_INTERVAL_IN_MILLISECONDS * 5
     private var callback: HomeMapFragmentLocationCallback = HomeMapFragmentLocationCallback(this)
+
+    private val  SOURCE_ID = "SOURCE_ID"
+    private val  ICON_ID = "ICON_ID"
+    private val  LAYER_ID = "LAYER_ID"
+
+    private var retrofit: Retrofit? = RetrofitClient.getInstance()
+    private var retrofitInterface: MyService? = null
+    private lateinit var sessionManager: SessionManager
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
@@ -52,10 +78,30 @@ class HomeMapFragment : Fragment(), OnMapReadyCallback, PermissionsListener {
 
     override fun onMapReady(mapboxMap: MapboxMap) {
         this.mapboxMap =mapboxMap
+
         mapboxMap.setStyle(Style.MAPBOX_STREETS) {
             enableLocationComponent(it)
         }
 
+
+
+
+    }
+
+    private fun initAddMarker(map: MapboxMap) {
+        val symbolLayers = ArrayList<Feature>()
+        symbolLayers.add(Feature.fromGeometry(Point.fromLngLat(38.0, 9.9)))
+        symbolLayers.add(Feature.fromGeometry(Point.fromLngLat(38.4, 8.0)))
+
+        map.setStyle(
+            Style.Builder().fromUri(Style.MAPBOX_STREETS)
+                .withImage(ICON_ID, BitmapUtils
+                    .getBitmapFromDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.mapbox_marker_icon_default))!!)
+                .withSource(GeoJsonSource(SOURCE_ID, FeatureCollection.fromFeatures(symbolLayers)))
+                .withLayer(
+                    SymbolLayer(LAYER_ID, SOURCE_ID)
+                    .withProperties(iconImage(ICON_ID), iconSize(1.0f), iconAllowOverlap(true), iconIgnorePlacement(true)))
+        )
     }
     @SuppressWarnings("MissingPermission")
     private fun enableLocationComponent(loadedMapStyle: Style) {
@@ -110,16 +156,64 @@ class HomeMapFragment : Fragment(), OnMapReadyCallback, PermissionsListener {
     inner class HomeMapFragmentLocationCallback internal constructor(fragment: HomeMapFragment) :
         LocationEngineCallback<LocationEngineResult> {
         private val fragmentWeakReference: WeakReference<HomeMapFragment> = WeakReference(fragment)
+        var latitude:Double = 0.0
+        var longitude:Double = 0.0
 
         override fun onSuccess(result: LocationEngineResult?) {
             val fragment: HomeMapFragment? = fragmentWeakReference.get()
             if (fragment != null) {
                 val location = result?.lastLocation ?: return
-                val lat = result.lastLocation?.latitude!!
-                val lng = result.lastLocation?.longitude!!
-                val latLng = LatLng(lat, lng)
+                 latitude = result.lastLocation?.latitude!!
+                 longitude= result.lastLocation?.longitude!!
+                val latLng = LatLng(latitude, longitude)
+
 
                 Toast.makeText(requireContext(), "Location update : $latLng", Toast.LENGTH_SHORT).show()
+/*
+                sessionManager= SessionManager(requireContext())
+                val call = retrofitInterface!!.findspot("Bearer ${sessionManager.fetchAuthToken()}",longitude,latitude)
+
+                call.enqueue(object: Callback<List<Location>>{
+                    override fun onFailure(call: Call<List<Location>>, t: Throwable) {
+                        Toast.makeText(requireContext(), t.message, Toast.LENGTH_LONG).show()
+                    }
+
+                    override fun onResponse(
+                        call: Call<List<Location>>,
+                        response: Response<List<Location>>
+                    ) {
+                        /*for(i in response.body()!!.listIterator()){
+                            Toast.makeText(requireContext(), "${response.body()}",Toast.LENGTH_LONG).show()
+                        }
+
+                         */
+                        if (response.code()==200 && response.body()!=null) {
+
+                            Toast.makeText(requireContext(),"connected ${response.body()}", Toast.LENGTH_LONG).show()
+                            //toasted the token to check if its working.
+
+                            val intent = Intent(requireContext(), HomeActivity::class.java)
+                            startActivity(intent)
+
+                        } else if (response.code() == 400) {
+
+                            Toast.makeText(requireContext(), "client error", Toast.LENGTH_LONG)
+                                .show()
+                        }
+
+                    }
+
+                })
+
+ */
+
+
+
+
+
+                initAddMarker(mapboxMap)
+
+
 
                 if (fragment.mapboxMap != null && result.lastLocation != null) {
                     fragment.mapboxMap.getLocationComponent()

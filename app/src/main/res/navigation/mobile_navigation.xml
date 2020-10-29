@@ -22,5 +22,15 @@
         android:name="com.gebeya.parkingspot.ui.slideshow.SlideshowFragment"
         android:label="Setting"
         tools:layout="@layout/fragment_slideshow" />
+    <fragment
+        android:id="@+id/spotListFragment"
+        android:name="com.gebeya.parkingspot.SpotListFragment"
+        android:label="fragment_spot_list"
+        tools:layout="@layout/fragment_spot_list" />
+    <activity
+        android:id="@+id/nearby"
+        android:name="com.gebeya.parkingspot.Nearby"
+        android:label="activity_nearby"
+        tools:layout="@layout/activity_nearby" />
 
 </navigation>

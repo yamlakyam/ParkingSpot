@@ -17,6 +17,10 @@
             android:id="@+id/nav_Setting"
             android:icon="@drawable/ic_menu_slideshow"
             android:title="Setting" />
+        <item
+            android:id="@+id/nearby"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="NearBy" />
 
     </group>
 </menu>
