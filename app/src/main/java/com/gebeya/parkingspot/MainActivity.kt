@@ -39,17 +39,33 @@ class MainActivity : AppCompatActivity() {
     private var retrofit: Retrofit? = RetrofitClient.getInstance()
     private var retrofitInterface: MyService? = null
 
-    private lateinit var sessionManager: SessionManager
+    private var sessionManager: SessionManager?=null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(com.gebeya.parkingspot.R.layout.activity_main)
 
+        sessionManager=SessionManager(this)
+
+        if(sessionManager?.fetchPassword()!=null && sessionManager?.fetchPassword()!=null && sessionManager?.fetchRole()=="user"){
+            val intent = Intent(this@MainActivity, HomeActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+        else if(sessionManager?.fetchPassword()!=null && sessionManager?.fetchPassword()!=null && sessionManager?.fetchRole()=="parking_officer"){
+            val intent = Intent(this@MainActivity, PoHomeActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
+
+
+
         //google signin
         val gso =
-                GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                        .requestEmail()
-                        .build()
+            GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build()
 
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
 
@@ -63,34 +79,36 @@ class MainActivity : AppCompatActivity() {
         callbackManager = CallbackManager.Factory.create()
 
         LoginManager.getInstance().registerCallback(callbackManager,
-                object : FacebookCallback<LoginResult?> {
-                    override fun onSuccess(loginResult: LoginResult?) {
-                        Toast.makeText(
-                                this@MainActivity,
-                                "Facebook login successful",
-                                Toast.LENGTH_LONG
-                        ).show()
-                        val intent = Intent(this@MainActivity, HomeActivity::class.java)
-                        startActivity(intent)
+            object : FacebookCallback<LoginResult?> {
+                override fun onSuccess(loginResult: LoginResult?) {
+                    Toast.makeText(
+                        this@MainActivity,
+                        "Facebook login successful",
+                        Toast.LENGTH_LONG
+                    ).show()
+                    val intent = Intent(this@MainActivity, HomeActivity::class.java)
+                    startActivity(intent)
 
-                    }
+                }
 
-                    override fun onCancel() {
-                        Toast.makeText(this@MainActivity, "Facebook login Cancelled", Toast.LENGTH_LONG)
-                                .show()
-                    }
+                override fun onCancel() {
+                    Toast.makeText(this@MainActivity, "Facebook login Cancelled", Toast.LENGTH_LONG)
+                        .show()
+                }
 
-                    override fun onError(exception: FacebookException) {
-                        // App code
-                    }
-                })
+                override fun onError(exception: FacebookException) {
+                    // App code
+                }
+            })
 
         facebook_ic.setOnClickListener {
             LoginManager.getInstance().logInWithReadPermissions(
-                    this@MainActivity, Arrays.asList("public_profile", "user_friends")
+                this@MainActivity, Arrays.asList("public_profile", "user_friends")
             )
         }
         retrofitInterface = retrofit!!.create(MyService::class.java)
+
+
 
         login_btn.setOnClickListener {
             if (email.text.toString().trim().isEmpty()) {
@@ -113,32 +131,34 @@ class MainActivity : AppCompatActivity() {
 
             call.enqueue(object : Callback<LoginResponse> {
                 override fun onResponse(
-                        call: Call<LoginResponse>,
-                        response: Response<LoginResponse>
+                    call: Call<LoginResponse>,
+                    response: Response<LoginResponse>
                 ) {
                     if (response.code()==200 && response.body()!=null) {
 
-                        sessionManager.saveAuthToken(response.body()!!.token)
-                        //sessionManager.saveEmail((response.body()!!.email))
-                        //sessionManager.savePassword((response.body()!!.password))
-                        sessionManager.saveRoles((response.body()!!.roles[0]))
+                        sessionManager!!.saveAuthToken(response.body()!!.token)
+                        sessionManager!!.saveRoles((response.body()!!.roles[0]))
+                        sessionManager!!.saveEmail((response.body()!!.email))
+                        sessionManager!!.savePassword((response.body()!!.password))
 
 
-                        Toast.makeText(this@MainActivity,"User Logged in successful ${response.body()!!.token}", Toast.LENGTH_LONG).show()
+                        //Toast.makeText(this@MainActivity,"User Logged in successful ${response.body()!!.token}", Toast.LENGTH_LONG).show()
 
                         //toasted the token to check if its working.
 
 
-                        /*if(sessionManager.fetchPassword()!=null && sessionManager.fetchPassword()!=null && sessionManager.fetchRole()=="user"){
+                        if(sessionManager?.fetchPassword()!=null && sessionManager?.fetchPassword()!=null && sessionManager?.fetchRole()=="user"){
                             val intent = Intent(this@MainActivity, HomeActivity::class.java)
+                            intent.putExtra("email",email.text)
+                            intent.putExtra("name",response.body()!!.name)
                             startActivity(intent)
-                            finish()
+                            //finish()
                         }
-                        else if(sessionManager.fetchPassword()!=null && sessionManager.fetchPassword()!=null && sessionManager.fetchRole()=="parking_officer"){
+                        else if(sessionManager?.fetchPassword()!=null && sessionManager?.fetchPassword()!=null && sessionManager?.fetchRole()=="parking_officer"){
                             val intent = Intent(this@MainActivity, PoHomeActivity::class.java)
                             startActivity(intent)
                             finish()
-                        }*/
+                        }
 
                         if(response.body()!!.roles[0]=="user"){
                             val intent = Intent(this@MainActivity, HomeActivity::class.java)
@@ -157,7 +177,7 @@ class MainActivity : AppCompatActivity() {
                     } else if (response.code() == 400) {
 
                         Toast.makeText(this@MainActivity, "User doesnt exist ", Toast.LENGTH_LONG)
-                                .show()
+                            .show()
                     }
                 }
 
@@ -174,6 +194,9 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, ForgotPasswordActivity::class.java)
             startActivity(intent)
         }
+
+
+
 
 
     }
@@ -212,8 +235,19 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-
         val account = GoogleSignIn.getLastSignedInAccount(this)
+        sessionManager= SessionManager(this)
+        if(sessionManager?.fetchPassword()!=null && sessionManager?.fetchPassword()!=null && sessionManager?.fetchRole()=="user"){
+            val intent = Intent(this@MainActivity, HomeActivity::class.java)
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK).flags=Intent.FLAG_ACTIVITY_CLEAR_TOP
+            startActivity(intent)
+            finish()
+        }
+        else if(sessionManager?.fetchPassword()!=null && sessionManager?.fetchPassword()!=null && sessionManager?.fetchRole()=="parking_officer"){
+            val intent = Intent(this@MainActivity, PoHomeActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
 
     }
 }

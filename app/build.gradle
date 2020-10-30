@@ -63,5 +63,9 @@ dependencies {
     implementation 'com.facebook.android:facebook-login:[5,6)'
     implementation 'com.mapbox.mapboxsdk:mapbox-android-sdk:9.2.1'
     implementation 'com.mapbox.mapboxsdk:mapbox-android-plugin-locationlayer:0.11.0'
+    def cardview_version = "1.0.0"
+    implementation "androidx.legacy:legacy-support-v4:$cardview_version"
+    implementation "com.google.android.material:material:$cardview_version"
+    implementation "androidx.cardview:cardview:$cardview_version"
 
 }

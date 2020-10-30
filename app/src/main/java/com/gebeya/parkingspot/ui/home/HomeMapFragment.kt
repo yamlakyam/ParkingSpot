@@ -37,6 +37,7 @@ import java.lang.ref.WeakReference
 import com.mapbox.mapboxsdk.style.layers.SymbolLayer
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource
 import com.mapbox.mapboxsdk.utils.BitmapUtils
+import kotlinx.android.synthetic.main.nav_header_main.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -74,6 +75,8 @@ class HomeMapFragment : Fragment(), OnMapReadyCallback, PermissionsListener {
 
         retrofitInterface = retrofit!!.create(MyService::class.java)
 
+        //emailAddress.text=sessionManager.fetchEmail()
+
         return root
     }
 
@@ -89,9 +92,6 @@ class HomeMapFragment : Fragment(), OnMapReadyCallback, PermissionsListener {
         mapboxMap.setStyle(Style.MAPBOX_STREETS) {
             enableLocationComponent(it)
         }
-
-
-
 
     }
 
@@ -209,36 +209,30 @@ class HomeMapFragment : Fragment(), OnMapReadyCallback, PermissionsListener {
                         call: Call<ArrayList<Nearest>>,
                         response: Response<ArrayList<Nearest>>
                     ) {
-
                         if (response.code()==200 && response.body()!=null) {
-
                             resp = response.body()!!
-
 
                             for(i in 0..resp.size-1){
                                 arrayListLoc.add(resp[i].location.coordinates)
                             }
 
-
                             Toast.makeText(requireContext(),"connected $arrayListLoc", Toast.LENGTH_LONG).show()
+
+                            initAddMarker(mapboxMap)
                             //toasted the token to check if its working.
-
-
                         } else if (response.code() == 400) {
 
                             Toast.makeText(requireContext(), "client error", Toast.LENGTH_LONG)
                                 .show()
                         }
-
                     }
-
                 })
 
 
 
 
 
-                initAddMarker(mapboxMap)
+
 
 
 
