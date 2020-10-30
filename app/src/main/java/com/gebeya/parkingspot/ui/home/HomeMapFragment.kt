@@ -62,11 +62,18 @@ class HomeMapFragment : Fragment(), OnMapReadyCallback, PermissionsListener {
     private var retrofitInterface: MyService? = null
     private lateinit var sessionManager: SessionManager
 
+    private var resp = ArrayList<Nearest>()
+    private var arrayListLoc =ArrayList<List<Double>>()
+
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         Mapbox.getInstance(requireContext(), getString(R.string.mapbox_access_token))
         val root = inflater.inflate(R.layout.fragment_home_map, container, false)
+
+        retrofitInterface = retrofit!!.create(MyService::class.java)
+
         return root
     }
 
@@ -90,8 +97,23 @@ class HomeMapFragment : Fragment(), OnMapReadyCallback, PermissionsListener {
 
     private fun initAddMarker(map: MapboxMap) {
         val symbolLayers = ArrayList<Feature>()
-        symbolLayers.add(Feature.fromGeometry(Point.fromLngLat(38.0, 9.9)))
-        symbolLayers.add(Feature.fromGeometry(Point.fromLngLat(38.4, 8.0)))
+       // symbolLayers.add(Feature.fromGeometry(Point.fromLngLat(38.0, 9.9)))
+       // symbolLayers.add(Feature.fromGeometry(Point.fromLngLat(38.4, 8.0)))
+
+
+       /* val myArrayList = ArrayList<List<Double>>()
+        myArrayList.add(listOf(39.0,8.6))
+        myArrayList.add(listOf(38.7,9.6))
+
+        */
+
+        /*for(i in myArrayList)
+            symbolLayers.add(Feature.fromGeometry(Point.fromLngLat(i[0],i[1])))
+        */
+        Toast.makeText(requireContext(),"$arrayListLoc[0]",Toast.LENGTH_LONG).show()
+
+        for(i in arrayListLoc)
+            symbolLayers.add(Feature.fromGeometry(Point.fromLngLat(i[0],i[1])))
 
         map.setStyle(
             Style.Builder().fromUri(Style.MAPBOX_STREETS)
@@ -159,6 +181,7 @@ class HomeMapFragment : Fragment(), OnMapReadyCallback, PermissionsListener {
         var latitude:Double = 0.0
         var longitude:Double = 0.0
 
+
         override fun onSuccess(result: LocationEngineResult?) {
             val fragment: HomeMapFragment? = fragmentWeakReference.get()
             if (fragment != null) {
@@ -169,31 +192,37 @@ class HomeMapFragment : Fragment(), OnMapReadyCallback, PermissionsListener {
 
 
                 Toast.makeText(requireContext(), "Location update : $latLng", Toast.LENGTH_SHORT).show()
-/*
-                sessionManager= SessionManager(requireContext())
-                val call = retrofitInterface!!.findspot("Bearer ${sessionManager.fetchAuthToken()}",longitude,latitude)
 
-                call.enqueue(object: Callback<List<Location>>{
-                    override fun onFailure(call: Call<List<Location>>, t: Throwable) {
+                val params = HashMap<String, Double>()
+                params.put("longitude", longitude)
+                params.put("latitude", latitude)
+
+                sessionManager= SessionManager(requireContext())
+                val call = retrofitInterface!!.findspot("Bearer ${sessionManager.fetchAuthToken()}",params)
+
+                call.enqueue(object: Callback<ArrayList<Nearest>>{
+                    override fun onFailure(call: Call<ArrayList<Nearest>>, t: Throwable) {
                         Toast.makeText(requireContext(), t.message, Toast.LENGTH_LONG).show()
                     }
 
                     override fun onResponse(
-                        call: Call<List<Location>>,
-                        response: Response<List<Location>>
+                        call: Call<ArrayList<Nearest>>,
+                        response: Response<ArrayList<Nearest>>
                     ) {
-                        /*for(i in response.body()!!.listIterator()){
-                            Toast.makeText(requireContext(), "${response.body()}",Toast.LENGTH_LONG).show()
-                        }
 
-                         */
                         if (response.code()==200 && response.body()!=null) {
 
-                            Toast.makeText(requireContext(),"connected ${response.body()}", Toast.LENGTH_LONG).show()
+                            resp = response.body()!!
+
+
+                            for(i in 0..resp.size-1){
+                                arrayListLoc.add(resp[i].location.coordinates)
+                            }
+
+
+                            Toast.makeText(requireContext(),"connected $arrayListLoc", Toast.LENGTH_LONG).show()
                             //toasted the token to check if its working.
 
-                            val intent = Intent(requireContext(), HomeActivity::class.java)
-                            startActivity(intent)
 
                         } else if (response.code() == 400) {
 
@@ -204,8 +233,6 @@ class HomeMapFragment : Fragment(), OnMapReadyCallback, PermissionsListener {
                     }
 
                 })
-
- */
 
 
 

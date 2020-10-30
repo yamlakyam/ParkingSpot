@@ -31,52 +31,39 @@ class Nearby : AppCompatActivity() {
         retrofitInterface = retrofit!!.create(MyService::class.java)
 
 
+
+
         button3.setOnClickListener {
             sessionManager= SessionManager(this)
-            //Toast.makeText(this,sessionManager.fetchAuthToken(),Toast.LENGTH_SHORT).show()
             var token:String?
             token= sessionManager.fetchAuthToken()
+            val map = HashMap<String, Double>()
 
-            //Toast.makeText(this,sessionManager.fetchAuthToken(),Toast.LENGTH_SHORT).show()
-
-            //val params = HashMap<String, Double>()
             //params.put("longitude", 37.8)
             //params.put("latitude", 66.3)
-            val call = retrofitInterface.findspot("Bearer $token",38.7,8.94)
-            //val call = retrofitInterface.findspot(params)
-            call.enqueue(object: Callback<List<Location>>{
-                override fun onFailure(call: Call<List<Location>>, t: Throwable) {
-                    Toast.makeText(this@Nearby, "t.message", Toast.LENGTH_LONG).show()
+
+            map["longitude"] = 37.8
+            map["latitude"]=8.9
+            val call = retrofitInterface.findspot("Bearer $token",map)
+
+
+            call.enqueue(object: Callback<ArrayList<Nearest>>{
+                override fun onFailure(call: Call<ArrayList<Nearest>>, t: Throwable) {
+                    Toast.makeText(this@Nearby, t.message, Toast.LENGTH_LONG).show()
                 }
 
                 override fun onResponse(
-                    call: Call<List<Location>>,
-                    response: Response<List<Location>>
-                ) {
-                    /*for(i in response.body()!!.listIterator()){
-                        Toast.makeText(requireContext(), "${response.body()}",Toast.LENGTH_LONG).show()
-                    }
-
-                     */
-                    if (response.code()==200 && response.body()!=null) {
-
-                        Toast.makeText(this@Nearby,"connected ${response.body()}", Toast.LENGTH_LONG).show()
+                    call: Call<ArrayList<Nearest>>,
+                    response: Response<ArrayList<Nearest>>
+                ) { if (response.code()==200 && response.body()!=null) {
+                        Toast.makeText(this@Nearby,"connected ", Toast.LENGTH_LONG).show()
                         //toasted the token to check if its working.
-
-                        val intent = Intent(this@Nearby, HomeActivity::class.java)
-                        startActivity(intent)
-
                     } else if (response.code() == 400) {
-
                         Toast.makeText(this@Nearby, "client error", Toast.LENGTH_LONG)
                             .show()
                     }
-
                 }
-
             })
-
-
         }
 
         }

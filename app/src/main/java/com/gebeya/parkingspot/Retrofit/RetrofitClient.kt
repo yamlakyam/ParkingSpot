@@ -1,5 +1,7 @@
 package com.gebeya.parkingspot.Retrofit
 
+import com.gebeya.parkingspot.Location
+import com.gebeya.parkingspot.Nearest
 import com.gebeya.parkingspot.SessionManager
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -30,6 +32,9 @@ object RetrofitClient {
 
 
     }
+
+
+
 
 
 

@@ -42,11 +42,11 @@ class SlideshowFragment : Fragment() {
 
             
             sessionManager= SessionManager(requireContext())
-            val call = retrofitInterface!!.findspot("${sessionManager.fetchAuthToken()}",38.7,8.94)
+            //val call = retrofitInterface!!.findspot("${sessionManager.fetchAuthToken()}",38.7,8.94)
 
             button2.setOnClickListener {
 
-
+            /*
 
                 call.enqueue(object: Callback<List<Location>> {
                     override fun onFailure(call: Call<List<Location>>, t: Throwable) {
@@ -78,7 +78,7 @@ class SlideshowFragment : Fragment() {
 
                     }
 
-                })
+                })*/
 
             }
 

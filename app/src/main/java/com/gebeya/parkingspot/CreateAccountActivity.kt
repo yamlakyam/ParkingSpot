@@ -1,9 +1,10 @@
 package com.gebeya.parkingspot
 
+import android.R.attr
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.gebeya.parkingspot.Retrofit.MyService
 import com.gebeya.parkingspot.Retrofit.RetrofitClient
 import kotlinx.android.synthetic.main.activity_create_account.*
@@ -11,6 +12,9 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
+import java.util.regex.Matcher
+import java.util.regex.Pattern
+
 
 class CreateAccountActivity : AppCompatActivity() {
 
@@ -48,6 +52,16 @@ class CreateAccountActivity : AppCompatActivity() {
             if (confirm_password_reg.text.toString().trim().isEmpty()) {
                 confirm_password_reg.error = "Password Required"
                 confirm_password_reg.requestFocus()
+                return@setOnClickListener
+            }
+            if(plate_number.text.toString().length!=5){
+                plate_number.error="Plate Number must be five digits"
+                plate_number.requestFocus()
+                return@setOnClickListener
+            }
+            if (password_reg.text.toString().trim().length <8 && !(isValidPassword(password_reg.text.toString().trim()))){
+                password_reg.error="Password must be length of 8 digits and a strong one"
+                password_reg.requestFocus()
                 return@setOnClickListener
             }
             val map = HashMap<String, String>()
@@ -92,5 +106,17 @@ class CreateAccountActivity : AppCompatActivity() {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
+    }
+
+    private fun isValidPassword(pass: String): Boolean {
+        val pattern: Pattern
+        val matcher: Matcher
+
+        val PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{4,}$"
+
+        pattern = Pattern.compile(PASSWORD_PATTERN)
+        matcher = pattern.matcher(pass)
+
+        return matcher.matches()
     }
 }

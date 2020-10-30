@@ -119,12 +119,40 @@ class MainActivity : AppCompatActivity() {
                     if (response.code()==200 && response.body()!=null) {
 
                         sessionManager.saveAuthToken(response.body()!!.token)
+                        //sessionManager.saveEmail((response.body()!!.email))
+                        //sessionManager.savePassword((response.body()!!.password))
+                        sessionManager.saveRoles((response.body()!!.roles[0]))
+
+
                         Toast.makeText(this@MainActivity,"User Logged in successful ${response.body()!!.token}", Toast.LENGTH_LONG).show()
+
                         //toasted the token to check if its working.
 
-                        val intent = Intent(this@MainActivity, HomeActivity::class.java)
-                        startActivity(intent)
-                        finish()
+
+                        /*if(sessionManager.fetchPassword()!=null && sessionManager.fetchPassword()!=null && sessionManager.fetchRole()=="user"){
+                            val intent = Intent(this@MainActivity, HomeActivity::class.java)
+                            startActivity(intent)
+                            finish()
+                        }
+                        else if(sessionManager.fetchPassword()!=null && sessionManager.fetchPassword()!=null && sessionManager.fetchRole()=="parking_officer"){
+                            val intent = Intent(this@MainActivity, PoHomeActivity::class.java)
+                            startActivity(intent)
+                            finish()
+                        }*/
+
+                        if(response.body()!!.roles[0]=="user"){
+                            val intent = Intent(this@MainActivity, HomeActivity::class.java)
+                            startActivity(intent)
+                            finish()
+                        }
+
+                        else if(response.body()!!.roles[0]=="parking_officer"){
+                            val intent = Intent(this@MainActivity, PoHomeActivity::class.java)
+                            startActivity(intent)
+                            finish()
+                        }
+
+
 
                     } else if (response.code() == 400) {
 
@@ -146,6 +174,7 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, ForgotPasswordActivity::class.java)
             startActivity(intent)
         }
+
 
     }
 
