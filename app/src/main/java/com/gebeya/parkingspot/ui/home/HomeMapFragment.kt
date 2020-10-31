@@ -235,7 +235,7 @@ class HomeMapFragment : Fragment(), OnMapReadyCallback, PermissionsListener {
                                 arrayListLoc.add(resp[i].location.coordinates)
                             }
 
-                            Toast.makeText(requireContext(),"connected $arrayListLoc", Toast.LENGTH_LONG).show()
+                           // Toast.makeText(requireContext(),"connected $arrayListLoc", Toast.LENGTH_LONG).show()
 
                             initAddMarker(mapboxMap)
                             //toasted the token to check if its working.

@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
 import com.facebook.FacebookException
@@ -121,6 +122,9 @@ class MainActivity : AppCompatActivity() {
                 password.requestFocus()
                 return@setOnClickListener
             }
+            else{
+                progressB.isVisible=true
+            }
             val map = HashMap<String, String>()
 
             map["email"] = email.text.toString()
@@ -178,11 +182,13 @@ class MainActivity : AppCompatActivity() {
 
                         Toast.makeText(this@MainActivity, "User doesnt exist ", Toast.LENGTH_LONG)
                             .show()
+                        progressB.isVisible=false
                     }
                 }
 
                 override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
                     Toast.makeText(this@MainActivity, t.message, Toast.LENGTH_LONG).show()
+                    progressB.isVisible=false
                 }
             })
         }
