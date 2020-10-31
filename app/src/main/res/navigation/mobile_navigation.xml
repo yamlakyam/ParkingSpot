@@ -32,5 +32,10 @@
         android:name="com.gebeya.parkingspot.Nearby"
         android:label="activity_nearby"
         tools:layout="@layout/activity_nearby" />
+    <activity
+        android:id="@+id/mainActivity"
+        android:name="com.gebeya.parkingspot.MainActivity"
+        android:label="activity_main"
+        tools:layout="@layout/activity_main" />
 
 </navigation>

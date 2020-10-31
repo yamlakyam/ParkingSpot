@@ -2,16 +2,14 @@ package com.gebeya.parkingspot
 
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuItem
 import com.google.android.material.navigation.NavigationView
 import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.navigation.ui.*
 import kotlinx.android.synthetic.main.nav_header_main.*
 
 class HomeActivity : AppCompatActivity() {
@@ -45,12 +43,20 @@ class HomeActivity : AppCompatActivity() {
         //UserName.setText(sessionManager.fetchEmail())
 
     }
-
+/*
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.home, menu)
         return true
     }
+
+ */
+/*
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        return item!!.onNavDestinationSelected(findNavController(R.id.mainActivity))||super.onOptionsItemSelected(item)
+    }
+    */
 
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment)

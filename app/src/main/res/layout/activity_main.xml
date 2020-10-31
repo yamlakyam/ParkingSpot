@@ -114,18 +114,6 @@
             android:layout_weight="1"
             app:srcCompat="@drawable/icons8_facebook_48" />
 
-
-
-        <!--
-        <ImageView
-            android:id="@+id/twitter_ic"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="20dp"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/icons8_twitter_circled_48" />
-        -->
-
         <ImageView
             android:id="@+id/google_ic"
             android:layout_width="wrap_content"
@@ -133,18 +121,6 @@
             android:layout_weight="1"
             app:srcCompat="@drawable/icons8_google_plus_48" />
     </LinearLayout>
-
-    <!--
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-        <com.google.android.gms.common.SignInButton
-            android:id="@+id/sign_in_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-    </LinearLayout>
-    -->
 
 
 </LinearLayout>

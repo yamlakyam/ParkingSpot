@@ -4,15 +4,19 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Looper
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.Navigation.findNavController
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
+//import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.NavigationUI
+import androidx.navigation.ui.onNavDestinationSelected
 import com.gebeya.parkingspot.*
 import com.gebeya.parkingspot.Retrofit.MyService
 import com.gebeya.parkingspot.Retrofit.RetrofitClient
@@ -76,8 +80,23 @@ class HomeMapFragment : Fragment(), OnMapReadyCallback, PermissionsListener {
         retrofitInterface = retrofit!!.create(MyService::class.java)
 
         //emailAddress.text=sessionManager.fetchEmail()
-
+        sessionManager= SessionManager(requireContext())
+        setHasOptionsMenu(true)
         return root
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.home,menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        sessionManager.logout()
+
+        return item!!.onNavDestinationSelected(findNavController())||super.onOptionsItemSelected(item)
+        //return item!!.onNavDestinationSelected(findNavController())||super.onOptionsItemSelected(item)
+
+        //return NavigationUI.onNavDestinationSelected(item,requireView().findNavController())||super.onOptionsItemSelected(item)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -191,7 +210,7 @@ class HomeMapFragment : Fragment(), OnMapReadyCallback, PermissionsListener {
                 val latLng = LatLng(latitude, longitude)
 
 
-                Toast.makeText(requireContext(), "Location update : $latLng", Toast.LENGTH_SHORT).show()
+               // Toast.makeText(requireContext(), "Location update : $latLng", Toast.LENGTH_SHORT).show()
 
                 val params = HashMap<String, Double>()
                 params.put("longitude", longitude)
@@ -227,14 +246,6 @@ class HomeMapFragment : Fragment(), OnMapReadyCallback, PermissionsListener {
                         }
                     }
                 })
-
-
-
-
-
-
-
-
 
                 if (fragment.mapboxMap != null && result.lastLocation != null) {
                     fragment.mapboxMap.getLocationComponent()

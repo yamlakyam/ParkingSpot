@@ -59,4 +59,11 @@ class SessionManager(context: Context) {
         return pref.getString(USER_ROLE,null)
     }
 
+    fun logout(){
+        val editor=pref.edit()
+        editor.remove(USER_EMAIL)
+        editor.remove(USER_PASSWORD)
+        editor.apply()
+    }
+
 }
