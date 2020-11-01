@@ -11,6 +11,7 @@
         android:layout_height="match_parent">
 
         <androidx.recyclerview.widget.RecyclerView
+            tools:listitem="@layout/row_layout"
             android:id="@+id/rcSpots"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />

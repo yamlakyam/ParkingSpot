@@ -20,6 +20,7 @@ import androidx.navigation.ui.onNavDestinationSelected
 import com.gebeya.parkingspot.*
 import com.gebeya.parkingspot.Retrofit.MyService
 import com.gebeya.parkingspot.Retrofit.RetrofitClient
+import com.google.android.material.navigation.NavigationView
 import com.mapbox.android.core.location.*
 import com.mapbox.android.core.permissions.PermissionsListener
 import com.mapbox.android.core.permissions.PermissionsManager
@@ -41,6 +42,7 @@ import java.lang.ref.WeakReference
 import com.mapbox.mapboxsdk.style.layers.SymbolLayer
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource
 import com.mapbox.mapboxsdk.utils.BitmapUtils
+import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.nav_header_main.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -79,11 +81,23 @@ class HomeMapFragment : Fragment(), OnMapReadyCallback, PermissionsListener {
 
         retrofitInterface = retrofit!!.create(MyService::class.java)
 
-        //emailAddress.text=sessionManager.fetchEmail()
         sessionManager= SessionManager(requireContext())
+
+        /*val navigationView:NavigationView= R.layout.nav_header_main
+
+        val headerView:NavigationView=nav_view.getHeaderView(0).findViewById(R.id.UserName)
+        val navUsername : TextView = headerView.findViewById(R.id.UserName)
+        val navUserEmail : TextView = headerView.findViewById(R.id.emailAddress)
+        */
+
+
+        //emailAddress.text = sessionManager.fetchEmail()
+
+
         setHasOptionsMenu(true)
         return root
     }
+
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
@@ -103,6 +117,8 @@ class HomeMapFragment : Fragment(), OnMapReadyCallback, PermissionsListener {
         super.onViewCreated(view, savedInstanceState)
         mapView.onCreate(savedInstanceState)
         mapView.getMapAsync(this)
+
+       // emailAddress.text = sessionManager.fetchEmail()
     }
 
     override fun onMapReady(mapboxMap: MapboxMap) {
@@ -129,7 +145,7 @@ class HomeMapFragment : Fragment(), OnMapReadyCallback, PermissionsListener {
         /*for(i in myArrayList)
             symbolLayers.add(Feature.fromGeometry(Point.fromLngLat(i[0],i[1])))
         */
-        Toast.makeText(requireContext(),"$arrayListLoc[0]",Toast.LENGTH_LONG).show()
+        //Toast.makeText(requireContext(),"$arrayListLoc[0]",Toast.LENGTH_LONG).show()
 
         for(i in arrayListLoc)
             symbolLayers.add(Feature.fromGeometry(Point.fromLngLat(i[0],i[1])))
@@ -258,7 +274,7 @@ class HomeMapFragment : Fragment(), OnMapReadyCallback, PermissionsListener {
             Log.d("LocationChangeActivity", exception.localizedMessage)
             val fragment: HomeMapFragment? = fragmentWeakReference.get()
             if (fragment != null) {
-                Toast.makeText(requireContext(), exception.localizedMessage, Toast.LENGTH_SHORT).show()
+                //Toast.makeText(requireContext(), exception.localizedMessage, Toast.LENGTH_SHORT).show()
             }
         }
 

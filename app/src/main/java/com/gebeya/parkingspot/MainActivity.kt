@@ -144,7 +144,7 @@ class MainActivity : AppCompatActivity() {
                         sessionManager!!.saveRoles((response.body()!!.roles[0]))
                         sessionManager!!.saveEmail((response.body()!!.email))
                         sessionManager!!.savePassword((response.body()!!.password))
-
+                        sessionManager!!.saveName(response.body()!!.name)
 
                         //Toast.makeText(this@MainActivity,"User Logged in successful ${response.body()!!.token}", Toast.LENGTH_LONG).show()
 

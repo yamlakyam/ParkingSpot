@@ -13,6 +13,7 @@ class SessionManager(context: Context) {
         const val USER_EMAIL = "user_email"
         const val USER_PASSWORD = "user_password"
         const val USER_ROLE = "user_role"
+        const val USER_NAME = "user_name"
         //const val USER_INFO =
     }
 
@@ -57,6 +58,15 @@ class SessionManager(context: Context) {
     }
     fun fetchRole():String?{
         return pref.getString(USER_ROLE,null)
+    }
+
+    fun saveName(name:String){
+        val editor=pref.edit()
+        editor.putString(USER_NAME,name)
+        editor.apply()
+    }
+    fun fetchName():String?{
+        return pref.getString(USER_NAME,null)
     }
 
     fun logout(){

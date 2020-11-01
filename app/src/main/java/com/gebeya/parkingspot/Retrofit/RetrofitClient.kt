@@ -29,8 +29,6 @@ object RetrofitClient {
         } else {
             retrofit!!
         }
-
-
     }
 
 
