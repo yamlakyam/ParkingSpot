@@ -8,5 +8,3 @@ data class Nearest (val location: Location,
                     val parking_slots:Int,
                     val parking_lot_rank:Int,
                     val price:Int)
-
-

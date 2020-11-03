@@ -4,9 +4,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.navigation.Navigation.findNavController
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 
- class NearestAdapter(val nearest: ArrayList<Nearest>) : RecyclerView.Adapter<NearestAdapter.SpotViewHolder>(){
+class NearestAdapter(val nearest: ArrayList<Nearest>, var clickedItem: ClickedItem) : RecyclerView.Adapter<NearestAdapter.SpotViewHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SpotViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.row_layout,parent,false)
@@ -20,23 +23,30 @@ import androidx.recyclerview.widget.RecyclerView
 
     override fun onBindViewHolder(holder: SpotViewHolder, position: Int) {
         val near = nearest.get(position)
-       // var compnay:String=near.company
-       // holder.bindData(nearest,position)
+        // var compnay:String=near.company
+        // holder.bindData(nearest,position)
         holder.company.text=near.company
-        holder.info.text=near.floor.toString()
-        /*holder.itemView.setOnClickListener {
+        holder.info.text=near.price.toString()+" birr per minute"
+
+        holder.det.setOnClickListener {
+            clickedItem.clickedSpot(near)
 
         }
 
+        /*holder.itemView.setOnClickListener {
+        }
          */
+    }
+    interface ClickedItem {
+        fun clickedSpot(nearest: Nearest)
     }
 
 
-     class SpotViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
-         var company: TextView =itemView.findViewById(R.id.CompanytxtView)
+    class SpotViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
+        var company: TextView =itemView.findViewById(R.id.CompanytxtView)
         // private var company:TextView=itemView.CompanytxtView
         var info: TextView =itemView.findViewById(R.id.detailstxtView)
-       // var det: TextView =itemView.findViewById(R.id.detalslabel)
+         var det: TextView =itemView.findViewById(R.id.detalslabel)
         //var book: TextView =itemView.findViewById(R.id.bookBtn)
 
 
@@ -44,12 +54,9 @@ import androidx.recyclerview.widget.RecyclerView
             company.text=spotlist!!.get(position).company
             info.text=spotlist.get(position).floor.toString()
             itemView.setOnClickListener(View.OnClickListener {
-
                 itemClick.getItem(adapterPosition)
             })
-
         }
-
          */
     }
 

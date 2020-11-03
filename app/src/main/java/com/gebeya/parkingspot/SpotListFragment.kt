@@ -10,6 +10,8 @@ import android.widget.AbsListView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -25,7 +27,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 
 
-class SpotListFragment : Fragment() {
+class SpotListFragment : Fragment(), NearestAdapter.ClickedItem {
 
     private var retrofit: Retrofit? = RetrofitClient.getInstance()
     private var retrofitInterface: MyService? = null
@@ -47,17 +49,17 @@ class SpotListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        var bundle = arguments ?: return
-        var lat = bundle.getDouble("lat")
-        var long = bundle.getDouble("long")
+        //var bundle = arguments ?: return
+        //var lat = bundle.getDouble("lat")
+        //var long = bundle.getDouble("long")
 
 
-        Toast.makeText(requireContext(),"$lat",Toast.LENGTH_LONG)
-        Log.d("Bundle", "$lat")
+        //Toast.makeText(requireContext(),"$lat",Toast.LENGTH_LONG)
+        //Log.d("Bundle", "$lat")
 
         val params = HashMap<String, Double>()
-        params.put("longitude", long)
-        params.put("latitude", lat)
+        params.put("longitude", 38.7)
+        params.put("latitude", 8.9)
 
         retrofitInterface = retrofit!!.create(MyService::class.java)
         sessionManager = SessionManager(requireContext())
@@ -81,9 +83,9 @@ class SpotListFragment : Fragment() {
             ) {
                 if (response.code() == 200 && response.body() != null) {
                     var resp = response.body()!!
-                    recyclerView.adapter = NearestAdapter(resp)
+                    recyclerView.adapter = NearestAdapter(resp,this@SpotListFragment)
 
-                   // Toast.makeText(requireContext(), resp[0].floor, Toast.LENGTH_SHORT).show()
+                    // Toast.makeText(requireContext(), resp[0].floor, Toast.LENGTH_SHORT).show()
 /*
                     for(i in 0..resp.size-1){
                         arrayListLoc.add(resp[i].location.coordinates)
@@ -96,6 +98,13 @@ class SpotListFragment : Fragment() {
                 }
             }
         })
+
+
+    }
+
+    override fun clickedSpot(nearest: Nearest) {
+        Log.e("tag","clicked")
+        findNavController().navigate(R.id.action_spotListFragment_to_bookFragment)
 
 
     }

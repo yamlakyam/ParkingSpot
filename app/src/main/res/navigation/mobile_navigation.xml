@@ -22,11 +22,6 @@
         android:name="com.gebeya.parkingspot.ui.slideshow.SlideshowFragment"
         android:label="Setting"
         tools:layout="@layout/fragment_slideshow" />
-    <fragment
-        android:id="@+id/spotListFragment"
-        android:name="com.gebeya.parkingspot.SpotListFragment"
-        android:label="fragment_spot_list"
-        tools:layout="@layout/fragment_spot_list" />
     <activity
         android:id="@+id/mainActivity"
         android:name="com.gebeya.parkingspot.MainActivity"
@@ -37,5 +32,14 @@
         android:name="com.gebeya.parkingspot.BookFragment"
         android:label="fragment_book"
         tools:layout="@layout/fragment_book" />
+    <fragment
+        android:id="@+id/spotListFragment"
+        android:name="com.gebeya.parkingspot.SpotListFragment"
+        android:label="fragment_spot_list"
+        tools:layout="@layout/fragment_spot_list" >
+        <action
+            android:id="@+id/action_spotListFragment_to_bookFragment"
+            app:destination="@id/bookFragment" />
+    </fragment>
 
 </navigation>

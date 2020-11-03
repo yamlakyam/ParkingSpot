@@ -118,15 +118,14 @@ class HomeMapFragment : Fragment(), OnMapReadyCallback, PermissionsListener {
 
     private fun initAddMarker(map: MapboxMap) {
         val symbolLayers = ArrayList<Feature>()
-       // symbolLayers.add(Feature.fromGeometry(Point.fromLngLat(38.0, 9.9)))
-       // symbolLayers.add(Feature.fromGeometry(Point.fromLngLat(38.4, 8.0)))
+        // symbolLayers.add(Feature.fromGeometry(Point.fromLngLat(38.0, 9.9)))
+        // symbolLayers.add(Feature.fromGeometry(Point.fromLngLat(38.4, 8.0)))
 
 
-       /* val myArrayList = ArrayList<List<Double>>()
-        myArrayList.add(listOf(39.0,8.6))
-        myArrayList.add(listOf(38.7,9.6))
-
-        */
+        /* val myArrayList = ArrayList<List<Double>>()
+         myArrayList.add(listOf(39.0,8.6))
+         myArrayList.add(listOf(38.7,9.6))
+         */
 
         /*for(i in myArrayList)
             symbolLayers.add(Feature.fromGeometry(Point.fromLngLat(i[0],i[1])))
@@ -143,7 +142,7 @@ class HomeMapFragment : Fragment(), OnMapReadyCallback, PermissionsListener {
                 .withSource(GeoJsonSource(SOURCE_ID, FeatureCollection.fromFeatures(symbolLayers)))
                 .withLayer(
                     SymbolLayer(LAYER_ID, SOURCE_ID)
-                    .withProperties(iconImage(ICON_ID), iconSize(1.0f), iconAllowOverlap(true), iconIgnorePlacement(true)))
+                        .withProperties(iconImage(ICON_ID), iconSize(1.0f), iconAllowOverlap(true), iconIgnorePlacement(true)))
         )
     }
     @SuppressWarnings("MissingPermission")
@@ -207,8 +206,8 @@ class HomeMapFragment : Fragment(), OnMapReadyCallback, PermissionsListener {
             val fragment: HomeMapFragment? = fragmentWeakReference.get()
             if (fragment != null) {
                 val location = result?.lastLocation ?: return
-                 latitude = result.lastLocation?.latitude!!
-                 longitude= result.lastLocation?.longitude!!
+                latitude = result.lastLocation?.latitude!!
+                longitude= result.lastLocation?.longitude!!
                 val latLng = LatLng(latitude, longitude)
 
                 var bundle=Bundle()
@@ -218,7 +217,7 @@ class HomeMapFragment : Fragment(), OnMapReadyCallback, PermissionsListener {
                 frag.arguments=bundle
 
 
-               // Toast.makeText(requireContext(), "Location update : $latLng", Toast.LENGTH_SHORT).show()
+                // Toast.makeText(requireContext(), "Location update : $latLng", Toast.LENGTH_SHORT).show()
 
                 val params = HashMap<String, Double>()
                 params.put("longitude", longitude)
@@ -243,7 +242,7 @@ class HomeMapFragment : Fragment(), OnMapReadyCallback, PermissionsListener {
                                 arrayListLoc.add(resp[i].location.coordinates)
                             }
 
-                           // Toast.makeText(requireContext(),"connected $arrayListLoc", Toast.LENGTH_LONG).show()
+                            // Toast.makeText(requireContext(),"connected $arrayListLoc", Toast.LENGTH_LONG).show()
 
                             initAddMarker(mapboxMap)
                             //toasted the token to check if its working.

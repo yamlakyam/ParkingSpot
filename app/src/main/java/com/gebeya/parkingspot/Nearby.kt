@@ -53,21 +53,15 @@ class Nearby : AppCompatActivity() {
                     call: Call<ArrayList<Nearest>>,
                     response: Response<ArrayList<Nearest>>
                 ) { if (response.code()==200 && response.body()!=null) {
-                        Toast.makeText(this@Nearby,"connected ", Toast.LENGTH_LONG).show()
-                        //toasted the token to check if its working.
-                    } else if (response.code() == 400) {
-                        Toast.makeText(this@Nearby, "client error", Toast.LENGTH_LONG)
-                            .show()
-                    }
+                    Toast.makeText(this@Nearby,"connected ", Toast.LENGTH_LONG).show()
+                    //toasted the token to check if its working.
+                } else if (response.code() == 400) {
+                    Toast.makeText(this@Nearby, "client error", Toast.LENGTH_LONG)
+                        .show()
+                }
                 }
             })
         }
 
-        }
     }
-
-
-
-
-
-
+}
