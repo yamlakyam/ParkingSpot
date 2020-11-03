@@ -1,5 +1,10 @@
 package com.gebeya.parkingspot
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+import kotlinx.android.parcel.RawValue
+import java.io.Serializable
+
 data class Nearest (val location: Location,
                     val company: String,
                     val floor:Int,

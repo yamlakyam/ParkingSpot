@@ -22,9 +22,9 @@
             android:icon="@drawable/ic_menu_slideshow"
             android:title="RCV" />
         <item
-            android:id="@+id/bookFragment"
+            android:id="@+id/spotListActivity"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="RCV" />
+            android:title="spotActivity" />
 
     </group>
 </menu>

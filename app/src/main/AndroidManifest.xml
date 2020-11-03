@@ -13,7 +13,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".PoHomeActivity"></activity>
+        <activity android:name=".BookActivity"></activity>
+        <activity android:name=".SpotListActivity" />
+        <activity android:name=".PoHomeActivity" />
         <activity android:name=".PoLoginActivity" />
         <activity android:name=".Nearby" />
         <activity

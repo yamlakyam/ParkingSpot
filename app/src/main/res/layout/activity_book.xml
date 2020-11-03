@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
     xmlns:mapbox="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="bottom"
     android:orientation="vertical"
-    tools:context=".BookFragment"
-    android:padding="16dp">
-
-    <!-- TODO: Update blank fragment layout -->
+    android:padding="16dp"
+    tools:context=".BookActivity">
 
     <com.mapbox.mapboxsdk.maps.MapView
         android:id="@+id/mapView"
         android:layout_width="match_parent"
-        android:layout_height="235dp"
+        android:layout_height="266dp"
         mapbox:mapbox_cameraZoom="10">
 
     </com.mapbox.mapboxsdk.maps.MapView>
@@ -22,18 +23,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="bottom"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="0dp"
         android:orientation="vertical"
         android:paddingBottom="0dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/distanceLabelfrag"
+                android:id="@+id/distanceLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -41,7 +41,7 @@
                 android:textColor="#000000" />
 
             <TextView
-                android:id="@+id/distancefrag"
+                android:id="@+id/distance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="0dp"
@@ -55,10 +55,11 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/timelabelfrag"
+                android:id="@+id/timelabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -66,7 +67,7 @@
                 android:textColor="#000000" />
 
             <TextView
-                android:id="@+id/timeRangefrag"
+                android:id="@+id/timeRange"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="0dp"
@@ -80,10 +81,11 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/priceLabelfrag"
+                android:id="@+id/priceLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -91,7 +93,7 @@
                 android:textColor="#000000" />
 
             <TextView
-                android:id="@+id/pricefrag"
+                android:id="@+id/price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -102,26 +104,29 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="bottom"
             android:layout_marginTop="60dp"
+            android:layout_marginBottom="10dp"
             android:gravity="bottom"
             android:orientation="horizontal"
             android:paddingBottom="0dp">
 
             <Button
-                android:id="@+id/cancelbtnfrag"
+                android:id="@+id/cancelbtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
                 android:layout_weight="1"
-                android:background="#ffaadf"
+                android:background="#9D9D9D"
                 android:text="Cancel"
                 android:textColor="#FFFFFF" />
 
             <Button
-                android:id="@+id/bookBtnfrag"
+                android:id="@+id/bookBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
                 android:layout_weight="1"
                 android:background="#8024AA"
                 android:text="Book"

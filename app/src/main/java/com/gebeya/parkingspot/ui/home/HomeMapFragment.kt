@@ -210,11 +210,13 @@ class HomeMapFragment : Fragment(), OnMapReadyCallback, PermissionsListener {
                 longitude= result.lastLocation?.longitude!!
                 val latLng = LatLng(latitude, longitude)
 
-                var bundle=Bundle()
+                /*var bundle=Bundle()
                 bundle.putDouble("lat",latitude)
                 bundle.putDouble("long",longitude)
                 var frag=SpotListFragment()
                 frag.arguments=bundle
+
+                 */
 
 
                 // Toast.makeText(requireContext(), "Location update : $latLng", Toast.LENGTH_SHORT).show()

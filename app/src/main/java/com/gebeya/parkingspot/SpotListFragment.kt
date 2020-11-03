@@ -1,5 +1,6 @@
 package com.gebeya.parkingspot
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -27,7 +28,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 
 
-class SpotListFragment : Fragment(), NearestAdapter.ClickedItem {
+/*class SpotListFragment : Fragment(), NearestAdapter.ClickedItem {
 
     private var retrofit: Retrofit? = RetrofitClient.getInstance()
     private var retrofitInterface: MyService? = null
@@ -63,7 +64,7 @@ class SpotListFragment : Fragment(), NearestAdapter.ClickedItem {
 
         retrofitInterface = retrofit!!.create(MyService::class.java)
         sessionManager = SessionManager(requireContext())
-        var recyclerView: RecyclerView = rcSpots
+        var recyclerView: RecyclerView = rcSpotsfragment
         recyclerView.layoutManager = LinearLayoutManager(activity)
         recyclerView.addItemDecoration(
             DividerItemDecoration(
@@ -102,11 +103,21 @@ class SpotListFragment : Fragment(), NearestAdapter.ClickedItem {
 
     }
 
-    override fun clickedSpot(nearest: Nearest) {
+    override fun clickedSpot(nearest: Nearest1) {
         Log.e("tag","clicked")
         findNavController().navigate(R.id.action_spotListFragment_to_bookFragment)
+        /*val bundle = Bundle()
+        bundle.putParcelable("nearbyBundle",Nearest)
+        bundle.putListArrayList("nearby", )
+        passBundle.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_bundleFragment_to_passBundleFragment, bundle))
 
+         */
+        val intent= Intent(requireContext(),HomeActivity::class.java)
+        intent.putExtra("a",nearest)
 
     }
 
-}
+}*/
+
+
+

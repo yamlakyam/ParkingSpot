@@ -9,7 +9,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 
-class NearestAdapter(val nearest: ArrayList<Nearest>, var clickedItem: ClickedItem) : RecyclerView.Adapter<NearestAdapter.SpotViewHolder>(){
+class NearestAdapter(val nearest: ArrayList<Nearest1>, var clickedItem: ClickedItem) : RecyclerView.Adapter<NearestAdapter.SpotViewHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SpotViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.row_layout,parent,false)
@@ -27,9 +27,13 @@ class NearestAdapter(val nearest: ArrayList<Nearest>, var clickedItem: ClickedIt
         // holder.bindData(nearest,position)
         holder.company.text=near.company
         holder.info.text=near.price.toString()+" birr per minute"
+        /*holder.itemView.setOnClickListener { view : View ->
+            view.findNavController().navigate(R.id.action_spotListFragment_to_bookFragment)
 
+        }*/
         holder.det.setOnClickListener {
             clickedItem.clickedSpot(near)
+           // View.findNavController().navigate(R.id.action_spotListFragment_to_bookFragment)
 
         }
 
@@ -38,7 +42,7 @@ class NearestAdapter(val nearest: ArrayList<Nearest>, var clickedItem: ClickedIt
          */
     }
     interface ClickedItem {
-        fun clickedSpot(nearest: Nearest)
+        fun clickedSpot(nearest: Nearest1)
     }
 
 

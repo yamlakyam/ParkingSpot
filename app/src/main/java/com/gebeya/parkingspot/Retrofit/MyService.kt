@@ -1,10 +1,7 @@
 
 package com.gebeya.parkingspot.Retrofit
 
-import com.gebeya.parkingspot.Location
-import com.gebeya.parkingspot.LoginResponse
-import com.gebeya.parkingspot.Nearest
-import com.gebeya.parkingspot.NearestResponse
+import com.gebeya.parkingspot.*
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -24,6 +21,13 @@ interface MyService {
                  //@Query("latitude") latitude:Double): Call<ArrayList<Nearest>
                  //@QueryMap params:Map<String, Double> ):Call<ArrayList<Nearest>>
                  @Body map:HashMap<String, Double> ):Call<ArrayList<Nearest>>
+
+    @POST("main/getnearest")
+    fun findspot1(@Header("Authorization") token: String,
+                 //@Query("longitude") longitude:Double,
+                 //@Query("latitude") latitude:Double): Call<ArrayList<Nearest>
+                 //@QueryMap params:Map<String, Double> ):Call<ArrayList<Nearest>>
+                 @Body map:HashMap<String, Double> ):Call<ArrayList<Nearest1>>
 
 
 

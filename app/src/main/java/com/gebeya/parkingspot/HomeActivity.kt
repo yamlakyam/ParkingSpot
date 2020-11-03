@@ -5,6 +5,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.FragmentManager
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
@@ -38,6 +39,18 @@ class HomeActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        /*val fragment=SpotListFragment()
+        val manager=supportFragmentManager
+        val transaction=manager.beginTransaction()
+        transaction.replace(
+            R.id.spotListContainer,fragment
+        )
+        transaction.commit()
+
+         */
+
+
 
 
         sessionManager= SessionManager(this)

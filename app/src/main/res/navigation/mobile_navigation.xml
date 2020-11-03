@@ -31,7 +31,10 @@
         android:id="@+id/bookFragment"
         android:name="com.gebeya.parkingspot.BookFragment"
         android:label="fragment_book"
-        tools:layout="@layout/fragment_book" />
+        tools:layout="@layout/fragment_book" >
+        <argument android:name="nearby"
+            app:argType="com.gebeya.parkingspot.Nearest1[]" />
+    </fragment>
     <fragment
         android:id="@+id/spotListFragment"
         android:name="com.gebeya.parkingspot.SpotListFragment"
@@ -41,5 +44,15 @@
             android:id="@+id/action_spotListFragment_to_bookFragment"
             app:destination="@id/bookFragment" />
     </fragment>
+    <activity
+        android:id="@+id/spotListActivity"
+        android:name="com.gebeya.parkingspot.SpotListActivity"
+        android:label="activity_spot_list"
+        tools:layout="@layout/activity_spot_list" />
+    <activity
+        android:id="@+id/bookActivity"
+        android:name="com.gebeya.parkingspot.BookActivity"
+        android:label="activity_book"
+        tools:layout="@layout/activity_book" />
 
 </navigation>
