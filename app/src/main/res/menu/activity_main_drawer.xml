@@ -18,9 +18,13 @@
             android:icon="@drawable/ic_menu_slideshow"
             android:title="Setting" />
         <item
-            android:id="@+id/nearby"
+            android:id="@+id/spotListFragment"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="NearBy" />
+            android:title="RCV" />
+        <item
+            android:id="@+id/bookFragment"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="RCV" />
 
     </group>
 </menu>

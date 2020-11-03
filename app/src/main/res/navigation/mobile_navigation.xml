@@ -28,14 +28,14 @@
         android:label="fragment_spot_list"
         tools:layout="@layout/fragment_spot_list" />
     <activity
-        android:id="@+id/nearby"
-        android:name="com.gebeya.parkingspot.Nearby"
-        android:label="activity_nearby"
-        tools:layout="@layout/activity_nearby" />
-    <activity
         android:id="@+id/mainActivity"
         android:name="com.gebeya.parkingspot.MainActivity"
         android:label="activity_main"
         tools:layout="@layout/activity_main" />
+    <fragment
+        android:id="@+id/bookFragment"
+        android:name="com.gebeya.parkingspot.BookFragment"
+        android:label="fragment_book"
+        tools:layout="@layout/fragment_book" />
 
 </navigation>

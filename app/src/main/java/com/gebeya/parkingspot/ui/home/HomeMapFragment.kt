@@ -83,17 +83,6 @@ class HomeMapFragment : Fragment(), OnMapReadyCallback, PermissionsListener {
 
         sessionManager= SessionManager(requireContext())
 
-        /*val navigationView:NavigationView= R.layout.nav_header_main
-
-        val headerView:NavigationView=nav_view.getHeaderView(0).findViewById(R.id.UserName)
-        val navUsername : TextView = headerView.findViewById(R.id.UserName)
-        val navUserEmail : TextView = headerView.findViewById(R.id.emailAddress)
-        */
-
-
-        //emailAddress.text = sessionManager.fetchEmail()
-
-
         setHasOptionsMenu(true)
         return root
     }
@@ -108,9 +97,7 @@ class HomeMapFragment : Fragment(), OnMapReadyCallback, PermissionsListener {
         sessionManager.logout()
 
         return item!!.onNavDestinationSelected(findNavController())||super.onOptionsItemSelected(item)
-        //return item!!.onNavDestinationSelected(findNavController())||super.onOptionsItemSelected(item)
 
-        //return NavigationUI.onNavDestinationSelected(item,requireView().findNavController())||super.onOptionsItemSelected(item)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -118,7 +105,6 @@ class HomeMapFragment : Fragment(), OnMapReadyCallback, PermissionsListener {
         mapView.onCreate(savedInstanceState)
         mapView.getMapAsync(this)
 
-       // emailAddress.text = sessionManager.fetchEmail()
     }
 
     override fun onMapReady(mapboxMap: MapboxMap) {
@@ -224,6 +210,12 @@ class HomeMapFragment : Fragment(), OnMapReadyCallback, PermissionsListener {
                  latitude = result.lastLocation?.latitude!!
                  longitude= result.lastLocation?.longitude!!
                 val latLng = LatLng(latitude, longitude)
+
+                var bundle=Bundle()
+                bundle.putDouble("lat",latitude)
+                bundle.putDouble("long",longitude)
+                var frag=SpotListFragment()
+                frag.arguments=bundle
 
 
                // Toast.makeText(requireContext(), "Location update : $latLng", Toast.LENGTH_SHORT).show()

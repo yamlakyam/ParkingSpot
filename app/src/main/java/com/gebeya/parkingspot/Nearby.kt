@@ -39,9 +39,6 @@ class Nearby : AppCompatActivity() {
             token= sessionManager.fetchAuthToken()
             val map = HashMap<String, Double>()
 
-            //params.put("longitude", 37.8)
-            //params.put("latitude", 66.3)
-
             map["longitude"] = 37.8
             map["latitude"]=8.9
             val call = retrofitInterface.findspot("Bearer $token",map)

@@ -41,9 +41,6 @@ class HomeActivity : AppCompatActivity() {
 
 
         sessionManager= SessionManager(this)
-        //val email = nav_view.findViewById<TextView>(R.id.emailAddress)
-        //email.text = sessionManager.fetchEmail()
-
 
         val email:TextView = navView.getHeaderView(0).findViewById<TextView>(R.id.emailAddress)
         val name:TextView = navView.getHeaderView(0).findViewById<TextView>(R.id.UserName)
