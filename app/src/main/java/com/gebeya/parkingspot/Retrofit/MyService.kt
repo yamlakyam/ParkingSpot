@@ -14,7 +14,6 @@ interface MyService {
     fun executeSignup(@Body map: HashMap<String, String>): Call<Void>
 
 
-
     @POST("main/getnearest")
     fun findspot(@Header("Authorization") token: String,
                  //@Query("longitude") longitude:Double,
@@ -28,6 +27,10 @@ interface MyService {
                  //@Query("latitude") latitude:Double): Call<ArrayList<Nearest>
                  //@QueryMap params:Map<String, Double> ):Call<ArrayList<Nearest>>
                  @Body map:HashMap<String, Double> ):Call<ArrayList<Nearest1>>
+
+    @POST("main/vehicle/getavailable")
+    fun getslots(@Header("Authorization") token: String,
+                        @Body map:HashMap<String, String>):Call<ArrayList<Slot>>
 
 
 
