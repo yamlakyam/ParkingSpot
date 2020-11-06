@@ -5,3 +5,4 @@ data class Location(
     val type: String
 )
 
+

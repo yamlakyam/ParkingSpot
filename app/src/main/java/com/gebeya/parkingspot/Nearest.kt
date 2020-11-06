@@ -6,10 +6,13 @@ import kotlinx.android.parcel.RawValue
 import java.io.Serializable
 
 data class Nearest (val location: Location,
-                    val company: String,
+                    val company:Company,
                     val floor:Int,
                     val full_status:Boolean,
                     val _id:String,
                     val parking_slots:Int,
                     val parking_lot_rank:Int,
-                    val price:Int)
+                    val price:Int):Serializable
+
+
+

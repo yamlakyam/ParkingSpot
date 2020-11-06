@@ -14,7 +14,7 @@
     <com.mapbox.mapboxsdk.maps.MapView
         android:id="@+id/mapView"
         android:layout_width="match_parent"
-        android:layout_height="266dp"
+        android:layout_height="215dp"
         mapbox:mapbox_cameraZoom="10">
 
     </com.mapbox.mapboxsdk.maps.MapView>
@@ -100,6 +100,28 @@
                 android:gravity="right"
                 android:text="birr per minute"
                 android:textColor="#000000" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/slotLabel"
+                android:layout_width="151dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:text="Slot"
+                android:textColor="#000000" />
+
+            <Spinner
+                android:id="@+id/slotSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="right" />
         </LinearLayout>
 
         <LinearLayout

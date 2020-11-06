@@ -1,8 +1,8 @@
 package com.gebeya.parkingspot
 
 data class Slot(
-    val status:List<StatuS>,
     val _id:String,
+    val status:StatuS,
     val stack:String
     )
 
