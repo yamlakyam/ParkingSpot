@@ -14,6 +14,7 @@ class SessionManager(context: Context) {
         const val USER_PASSWORD = "user_password"
         const val USER_ROLE = "user_role"
         const val USER_NAME = "user_name"
+        const val TICKET_ID = "ticket_id"
         //const val USER_INFO =
     }
 
@@ -74,6 +75,15 @@ class SessionManager(context: Context) {
         editor.remove(USER_EMAIL)
         editor.remove(USER_PASSWORD)
         editor.apply()
+    }
+
+    fun saveTicket(ticket_id:String){
+        val editor=pref.edit()
+        editor.putString(TICKET_ID,ticket_id)
+        editor.apply()
+    }
+    fun fetchTicket():String?{
+        return pref.getString(TICKET_ID,null)
     }
 
 

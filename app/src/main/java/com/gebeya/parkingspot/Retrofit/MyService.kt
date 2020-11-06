@@ -36,6 +36,12 @@ interface MyService {
     fun park(@Header("Authorization") token: String,
              @Body map:HashMap<String, String>):Call<Park>
 
+    @POST("main/vehicle/exit")
+    fun exit(@Header("Authorization") token: String,
+             @Body map:HashMap<String, String>):Call<Exit>
+
+
+
 
 
 }

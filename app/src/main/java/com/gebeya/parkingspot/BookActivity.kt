@@ -47,13 +47,13 @@ class BookActivity : AppCompatActivity() {
 
         val intent = intent
 
-            var near = intent.getSerializableExtra("data") as Nearest1
-            val id: String = near._id
-            val company: String = near.company.name
-            val status: String = near.full_status.toString()
-            price.text=near.price.toString()+" birr per minute"
-           // var slots=(intent.getStringArrayExtra("slots"))
-            //Toast.makeText(this,slots.toString(),Toast.LENGTH_LONG).show()
+        var near = intent.getSerializableExtra("data") as Nearest1
+        val id: String = near._id
+        val company: String = near.company.name
+        val status: String = near.full_status.toString()
+        price.text=near.price.toString()+" birr per minute"
+        // var slots=(intent.getStringArrayExtra("slots"))
+        //Toast.makeText(this,slots.toString(),Toast.LENGTH_LONG).show()
 
         var parkingId=intent.getStringExtra("id")
 
@@ -85,10 +85,11 @@ class BookActivity : AppCompatActivity() {
 
                         override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
 
-                              slotSlected=parent!!.getItemAtPosition(position)
+                            slotSlected=parent!!.getItemAtPosition(position)
                         }
 
                     }
+
 
                     bookBtn.setOnClickListener {
                         val map = HashMap<String, String>()
@@ -102,14 +103,30 @@ class BookActivity : AppCompatActivity() {
 
                             override fun onResponse(call: Call<Park>, response: Response<Park>
                             ) {
+                                var resp1=response.body()!!._id
+                                sessionManager.saveTicket(resp1)
+                                Toast.makeText(this@BookActivity, resp1.toString(), Toast.LENGTH_LONG).show()
+
+                            }
+                        })
+                    }
+
+                    cancelbtn.setOnClickListener {
+                        val map = HashMap<String, String>()
+                        map.put("ticketId", sessionManager.fetchTicket()!!)
+                        var call = retrofitInterface!!.exit("Bearer ${sessionManager.fetchAuthToken()}", map)
+                        call.enqueue(object :Callback<Exit>{
+                            override fun onFailure(call: Call<Exit>, t: Throwable) {
+                                Toast.makeText(this@BookActivity, t.message, Toast.LENGTH_LONG).show()
+                            }
+
+                            override fun onResponse(call: Call<Exit>, response: Response<Exit>
+                            ) {
                                 var respo=response.body()!!
                                 Toast.makeText(this@BookActivity, respo.toString(), Toast.LENGTH_LONG).show()
 
                             }
                         })
-
-
-
                     }
 
 
