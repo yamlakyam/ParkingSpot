@@ -15,6 +15,8 @@ class SessionManager(context: Context) {
         const val USER_ROLE = "user_role"
         const val USER_NAME = "user_name"
         const val TICKET_ID = "ticket_id"
+        const val LONG="longitude"
+        const val LAT="latitude"
         //const val USER_INFO =
     }
 
@@ -84,6 +86,19 @@ class SessionManager(context: Context) {
     }
     fun fetchTicket():String?{
         return pref.getString(TICKET_ID,null)
+    }
+    fun saveCoordinate(latitude:String,longiude:String){
+        val editor=pref.edit()
+        editor.putString(LONG,longiude)
+        editor.putString(LAT,latitude)
+        editor.apply()
+
+    }
+    fun fetchLong():String{
+        return pref.getString(LONG,"")
+    }
+    fun fetchLat():String{
+        return pref.getString(LAT,"")
     }
 
 

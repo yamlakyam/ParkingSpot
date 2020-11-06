@@ -8,11 +8,23 @@ import android.widget.ArrayAdapter
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.gebeya.parkingspot.Retrofit.MyService
 import com.gebeya.parkingspot.Retrofit.RetrofitClient
+import com.mapbox.geojson.Feature
+import com.mapbox.geojson.FeatureCollection
+import com.mapbox.geojson.Point
 import com.mapbox.mapboxsdk.Mapbox
+import com.mapbox.mapboxsdk.maps.MapboxMap
+import com.mapbox.mapboxsdk.maps.OnMapReadyCallback
 import com.mapbox.mapboxsdk.maps.Style
+import com.mapbox.mapboxsdk.style.layers.PropertyFactory
+import com.mapbox.mapboxsdk.style.layers.SymbolLayer
+import com.mapbox.mapboxsdk.style.sources.GeoJsonSource
+import com.mapbox.mapboxsdk.utils.BitmapUtils
 import kotlinx.android.synthetic.main.activity_book.*
+import kotlinx.android.synthetic.main.activity_book.mapView
+import kotlinx.android.synthetic.main.fragment_home_map.*
 import org.json.JSONArray
 import retrofit2.Call
 import retrofit2.Callback
@@ -22,13 +34,19 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 
-class BookActivity : AppCompatActivity() {
+
+class BookActivity : AppCompatActivity(), OnMapReadyCallback {
     private var retrofit: Retrofit? = RetrofitClient.getInstance()
     private var retrofitInterface: MyService? = null
     private lateinit var sessionManager: SessionManager
     private var resp = ArrayList<Slot>()
     var listOfslot = mutableListOf<String>()
     private lateinit var slotSlected:Any
+    private lateinit var mapboxMap: MapboxMap
+
+    private val  SOURCE_ID = "SOURCE_ID"
+    private val  ICON_ID = "ICON_ID"
+    private val  LAYER_ID = "LAYER_ID"
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,11 +54,7 @@ class BookActivity : AppCompatActivity() {
         Mapbox.getInstance(this, getString(R.string.mapbox_access_token))
         setContentView(R.layout.activity_book)
         mapView?.onCreate(savedInstanceState)
-        mapView?.getMapAsync{ mapboxMap ->
-            mapboxMap.setStyle(Style.MAPBOX_STREETS) {
-
-            }
-        }
+        mapView.getMapAsync(this)
 
         retrofitInterface = retrofit!!.create(MyService::class.java)
         sessionManager = SessionManager(this)
@@ -59,7 +73,6 @@ class BookActivity : AppCompatActivity() {
 
         val map = HashMap<String, String>()
         map.put("parkingLotId", parkingId)
-
         var call = retrofitInterface!!.getslots("Bearer ${sessionManager.fetchAuthToken()}", map)
 
         call.enqueue(object : Callback<ArrayList<Slot>> {
@@ -139,6 +152,26 @@ class BookActivity : AppCompatActivity() {
         })
 
     }
+
+    override fun onMapReady(mapboxMap: MapboxMap) {
+        val symbolLayers = ArrayList<Feature>()
+        symbolLayers.add(Feature.fromGeometry(Point.fromLngLat(38.0, 9.9)))
+
+        mapboxMap.setStyle(
+            Style.Builder().fromUri(Style.MAPBOX_STREETS)
+                .withImage(ICON_ID, BitmapUtils
+                    .getBitmapFromDrawable(ContextCompat.getDrawable(this, R.drawable.mapbox_marker_icon_default))!!)
+                .withSource(GeoJsonSource(SOURCE_ID, FeatureCollection.fromFeatures(symbolLayers)))
+                .withLayer(
+                    SymbolLayer(LAYER_ID, SOURCE_ID)
+                        .withProperties(
+                            PropertyFactory.iconImage(ICON_ID),
+                            PropertyFactory.iconSize(1.0f),
+                            PropertyFactory.iconAllowOverlap(true),
+                            PropertyFactory.iconIgnorePlacement(true)
+                        ))
+        )
+    }
     public override fun onResume() {
         super.onResume()
         mapView?.onResume()
@@ -173,4 +206,8 @@ class BookActivity : AppCompatActivity() {
         super.onSaveInstanceState(outState)
         mapView?.onSaveInstanceState(outState)
     }
+
+
+
+
 }

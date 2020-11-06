@@ -40,8 +40,7 @@ interface MyService {
     fun exit(@Header("Authorization") token: String,
              @Body map:HashMap<String, String>):Call<Exit>
 
-
-
-
+    @POST("main/getallslots")
+    fun po(@Header("Authorization") token: String):Call<ArrayList<PoResponse>>
 
 }

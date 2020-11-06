@@ -16,7 +16,6 @@ class NearestAdapter(val nearest: ArrayList<Nearest1>, var clickedItem: ClickedI
         return SpotViewHolder(view)
     }
 
-
     override fun getItemCount(): Int {
         return nearest.size
     }
@@ -33,13 +32,10 @@ class NearestAdapter(val nearest: ArrayList<Nearest1>, var clickedItem: ClickedI
         }*/
         holder.det.setOnClickListener {
             clickedItem.clickedSpot(near)
-           // View.findNavController().navigate(R.id.action_spotListFragment_to_bookFragment)
+
 
         }
 
-        /*holder.itemView.setOnClickListener {
-        }
-         */
     }
     interface ClickedItem {
         fun clickedSpot(nearest: Nearest1)
@@ -52,7 +48,6 @@ class NearestAdapter(val nearest: ArrayList<Nearest1>, var clickedItem: ClickedI
         var info: TextView =itemView.findViewById(R.id.detailstxtView)
          var det: TextView =itemView.findViewById(R.id.detalslabel)
         //var book: TextView =itemView.findViewById(R.id.bookBtn)
-
 
         /*fun bindData(spotlist:ArrayList<Nearest>,position: Int){
             company.text=spotlist!!.get(position).company
