@@ -32,6 +32,10 @@ interface MyService {
     fun getslots(@Header("Authorization") token: String,
                         @Body map:HashMap<String, String>):Call<ArrayList<Slot>>
 
+    @POST("main/vehicle/park")
+    fun park(@Header("Authorization") token: String,
+             @Body map:HashMap<String, String>):Call<Park>
+
 
 
 }

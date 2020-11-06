@@ -10,6 +10,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.gebeya.parkingspot.Retrofit.MyService
 import com.gebeya.parkingspot.Retrofit.RetrofitClient
+import com.mapbox.mapboxsdk.Mapbox
+import com.mapbox.mapboxsdk.maps.Style
 import kotlinx.android.synthetic.main.activity_book.*
 import org.json.JSONArray
 import retrofit2.Call
@@ -31,7 +33,14 @@ class BookActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Mapbox.getInstance(this, getString(R.string.mapbox_access_token))
         setContentView(R.layout.activity_book)
+        mapView?.onCreate(savedInstanceState)
+        mapView?.getMapAsync{ mapboxMap ->
+            mapboxMap.setStyle(Style.MAPBOX_STREETS) {
+
+            }
+        }
 
         retrofitInterface = retrofit!!.create(MyService::class.java)
         sessionManager = SessionManager(this)
@@ -81,6 +90,28 @@ class BookActivity : AppCompatActivity() {
 
                     }
 
+                    bookBtn.setOnClickListener {
+                        val map = HashMap<String, String>()
+                        map.put("parkingLotId", parkingId)
+                        map.put("parkingSlotId",slotSlected.toString())
+                        var call = retrofitInterface!!.park("Bearer ${sessionManager.fetchAuthToken()}", map)
+                        call.enqueue(object :Callback<Park>{
+                            override fun onFailure(call: Call<Park>, t: Throwable) {
+                                Toast.makeText(this@BookActivity, t.message, Toast.LENGTH_LONG).show()
+                            }
+
+                            override fun onResponse(call: Call<Park>, response: Response<Park>
+                            ) {
+                                var respo=response.body()!!
+                                Toast.makeText(this@BookActivity, respo.toString(), Toast.LENGTH_LONG).show()
+
+                            }
+                        })
+
+
+
+                    }
+
 
                 } else if (response.code() == 400) {
 
@@ -90,5 +121,39 @@ class BookActivity : AppCompatActivity() {
             }
         })
 
+    }
+    public override fun onResume() {
+        super.onResume()
+        mapView?.onResume()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        mapView?.onStart()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        mapView?.onStop()
+    }
+
+    public override fun onPause() {
+        super.onPause()
+        mapView?.onPause()
+    }
+
+    override fun onLowMemory() {
+        super.onLowMemory()
+        mapView?.onLowMemory()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mapView?.onDestroy()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        mapView?.onSaveInstanceState(outState)
     }
 }
