@@ -1,14 +1,17 @@
 package com.gebeya.parkingspot
 
-import androidx.appcompat.app.AppCompatActivity
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.gebeya.parkingspot.Retrofit.MyService
 import com.gebeya.parkingspot.Retrofit.RetrofitClient
 import kotlinx.android.synthetic.main.activity_book.*
+import org.json.JSONArray
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -16,12 +19,15 @@ import retrofit2.Retrofit
 import java.util.*
 import kotlin.collections.ArrayList
 
+
 class BookActivity : AppCompatActivity() {
     private var retrofit: Retrofit? = RetrofitClient.getInstance()
     private var retrofitInterface: MyService? = null
     private lateinit var sessionManager: SessionManager
     private var resp = ArrayList<Slot>()
-    var arrayListslot =ArrayList<String>()
+    var listOfslot = mutableListOf<String>()
+    private lateinit var slotSlected:Any
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,8 +63,24 @@ class BookActivity : AppCompatActivity() {
                     resp = response.body()!!
 
                     for(i in 0..resp.size-1){
-                        arrayListslot.add(resp[i]._id)
+                        listOfslot.add(resp[i]._id)
                     }
+                    //Toast.makeText(this@BookActivity,listOfslot.toString(), Toast.LENGTH_LONG).show()
+
+                    val adapter= ArrayAdapter<String>(this@BookActivity,R.layout.support_simple_spinner_dropdown_item,listOfslot)
+                    slotSpinner.adapter=adapter
+                    slotSpinner.onItemSelectedListener= object : AdapterView.OnItemSelectedListener{
+                        override fun onNothingSelected(parent: AdapterView<*>?) {
+
+                        }
+
+                        override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+
+                              slotSlected=parent!!.getItemAtPosition(position)
+                        }
+
+                    }
+
 
                 } else if (response.code() == 400) {
 
@@ -67,19 +89,6 @@ class BookActivity : AppCompatActivity() {
 
             }
         })
-
-        val adapter= ArrayAdapter<String>(this,R.layout.support_simple_spinner_dropdown_item,arrayListslot)
-        slotSpinner.adapter=adapter
-        slotSpinner.onItemSelectedListener= object : AdapterView.OnItemSelectedListener{
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-
-            }
-
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-
-            }
-
-        }
 
     }
 }

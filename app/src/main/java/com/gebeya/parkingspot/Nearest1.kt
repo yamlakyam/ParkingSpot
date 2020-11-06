@@ -17,4 +17,3 @@ data class Nearest1(
 
 data class Company(val  name:String):Serializable
 
-data class Slots(val slots:ArrayList<String>):Serializable
