@@ -245,7 +245,7 @@ class MainActivity : AppCompatActivity() {
         sessionManager= SessionManager(this)
         if(sessionManager?.fetchPassword()!=null && sessionManager?.fetchPassword()!=null && sessionManager?.fetchRole()=="user"){
             val intent = Intent(this@MainActivity, HomeActivity::class.java)
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK).flags=Intent.FLAG_ACTIVITY_CLEAR_TOP
+            //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK).flags=Intent.FLAG_ACTIVITY_CLEAR_TOP
             startActivity(intent)
             finish()
         }
