@@ -7,7 +7,8 @@ data class Slot(
     val _id:String,
     val status:StatuS,
     val stack:String,
-    val created_at:String
+    val created_at:String,
+    val description:String
     ):Serializable
 
 
@@ -24,5 +25,10 @@ data class PoResponse(val _id: String,
                       val exit_at:String,
                       val price_per_hour:Int,
                       val total_price:Double):Serializable
+
+data class Stack(val floor:Double,
+                 val _id:String,
+                 val company:String)
+
 
 

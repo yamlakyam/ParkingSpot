@@ -46,4 +46,8 @@ interface MyService {
     fun poCancel(@Header("Authorization") token: String,
                  @Body map: HashMap<String, String>):Call<PoResponse>
 
+    @POST("main/getstacks")
+    fun getstack(@Header("Authorization") token: String ):Call<ArrayList<Stack>>
+
+
 }

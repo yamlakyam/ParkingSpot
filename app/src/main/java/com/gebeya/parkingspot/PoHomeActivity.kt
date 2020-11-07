@@ -76,6 +76,11 @@ class PoHomeActivity : AppCompatActivity() {
             })
         }
 
+        parkBtn.setOnClickListener {
+            val intent = Intent(this, PoStackListActivity::class.java)
+            startActivity(intent)
+        }
+
 
 
     }

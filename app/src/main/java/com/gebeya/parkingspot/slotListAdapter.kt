@@ -21,6 +21,7 @@ class slotListAdapter(val slots:ArrayList<Slot>,var clickedItem: slotListAdapter
     override fun onBindViewHolder(holder: SlotHolder, position: Int) {
         val slott = slots.get(position)
         holder.slotn.text=slott._id
+        holder.desc.text=slott.description
         holder.itemView.setOnClickListener {
             clickedItem.clickedSpot(slott)
 
@@ -34,6 +35,7 @@ class slotListAdapter(val slots:ArrayList<Slot>,var clickedItem: slotListAdapter
 
     class SlotHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         var slotn: TextView =itemView.findViewById(R.id.slotName)
+        var desc:TextView=itemView.findViewById(R.id.desc)
 
     }
 

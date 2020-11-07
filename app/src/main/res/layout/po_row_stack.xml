@@ -1,29 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:gravity="center_horizontal"
     android:orientation="vertical"
-    android:padding="15dp">
+    android:padding="20dp">
 
     <TextView
-        android:id="@+id/slotName"
+        android:id="@+id/stackId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
         android:gravity="center_horizontal"
-        android:textColor="#000000"
-        android:textSize="24sp" />
+        android:text="TextView" />
 
     <TextView
-        android:id="@+id/desc"
+        android:id="@+id/floorId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="Description"
-        android:textColor="#8024AA"
-        android:textSize="20sp" />
-
+        android:text="TextView" />
 
 </LinearLayout>
