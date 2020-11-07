@@ -17,7 +17,12 @@ data class StatuS(
 )
 
 data class PoResponse(val _id: String,
-                      val status: StatuS,
-                      val occupied_by:String,
-                      val stack:String)
+                      val plate_number:String,
+                      val slot_id:String,
+                      val ticket_status:String,
+                      val park_at:String,
+                      val exit_at:String,
+                      val price_per_hour:Int,
+                      val total_price:Double):Serializable
+
 

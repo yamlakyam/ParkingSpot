@@ -56,7 +56,7 @@ class MainActivity : AppCompatActivity() {
         else if(sessionManager?.fetchPassword()!=null && sessionManager?.fetchPassword()!=null && sessionManager?.fetchRole()=="parking_officer"){
             val intent = Intent(this@MainActivity, PoHomeActivity::class.java)
             startActivity(intent)
-            finish()
+            //finish()
         }
 
 
@@ -163,11 +163,6 @@ class MainActivity : AppCompatActivity() {
                             startActivity(intent)
                             //finish()
                         }
-                        /*else if(sessionManager?.fetchPassword()!=null && sessionManager?.fetchPassword()!=null && sessionManager?.fetchRole()=="parking_officer"){
-                            val intent = Intent(this@MainActivity, PoHomeActivity::class.java)
-                            startActivity(intent)
-                            finish()
-                        }*/
 
                         if(response.body()!!.roles[0]=="user"){
                             val intent = Intent(this@MainActivity, HomeActivity::class.java)
@@ -254,13 +249,6 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
-        /*
-        else if(sessionManager?.fetchPassword()!=null && sessionManager?.fetchPassword()!=null && sessionManager?.fetchRole()=="parking_officer"){
-            val intent = Intent(this@MainActivity, PoHomeActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
-        */
 
     }
 }
