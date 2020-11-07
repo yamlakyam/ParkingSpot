@@ -1,5 +1,6 @@
 package com.gebeya.parkingspot
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -23,6 +24,7 @@ class slotListActivity : AppCompatActivity(), slotListAdapter.ClickedItem {
     private lateinit var sessionManager: SessionManager
     private var resp = ArrayList<Slot>()
     var listOfslot = mutableListOf<String>()
+    lateinit var parkingId:String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,7 +42,11 @@ class slotListActivity : AppCompatActivity(), slotListAdapter.ClickedItem {
         )
 
         val intent = intent
-        var parkingId=intent.getStringExtra("id")
+        parkingId=intent.getStringExtra("id")
+        //sending the received id to Bookactivity as ParkingLotId
+       // var intent1= Intent(this, BookActivity::class.java)
+        //intent1.putExtra("parkingLotId",parkingId)
+
 
         val map = HashMap<String, String>()
         map.put("parkingLotId", parkingId)
@@ -52,6 +58,7 @@ class slotListActivity : AppCompatActivity(), slotListAdapter.ClickedItem {
             }
 
             override fun onResponse(call: Call<ArrayList<Slot>>, response: Response<ArrayList<Slot>>) {
+
                 resp = response.body()!!
 
                 for(i in 0..resp.size-1){
@@ -63,6 +70,11 @@ class slotListActivity : AppCompatActivity(), slotListAdapter.ClickedItem {
     }
 
     override fun clickedSpot(slots: Slot) {
-        TODO("Not yet implemented")
+        var intent= Intent(this, BookActivity::class.java)
+        //intent.putExtra("data",slots)
+        var slotID=slots._id
+        intent.putExtra("slotId",slotID)
+        intent.putExtra("parkingLotId",parkingId)
+        startActivity(intent)
     }
 }

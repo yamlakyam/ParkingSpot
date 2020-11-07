@@ -79,11 +79,9 @@ class SpotListActivity : AppCompatActivity(), NearestAdapter.ClickedItem {
         var intent= Intent(this, slotListActivity::class.java)
         intent.putExtra("data",nearest)
         var parkingId=nearest._id
-        //Toast.makeText(this, parkingId,Toast.LENGTH_LONG).show()
 
         intent.putExtra("id",parkingId)//trying to send the id first then do the ntk call on the other activity
 
-        //intent.putExtra("slots",arrayListslot)
 
         startActivity(intent)
     }

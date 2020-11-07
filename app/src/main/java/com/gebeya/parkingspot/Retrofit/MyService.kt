@@ -13,7 +13,6 @@ interface MyService {
     @POST("auth/signup")
     fun executeSignup(@Body map: HashMap<String, String>): Call<Void>
 
-
     @POST("main/getnearest")
     fun findspot(@Header("Authorization") token: String,
                  //@Query("longitude") longitude:Double,
@@ -36,7 +35,7 @@ interface MyService {
     fun park(@Header("Authorization") token: String,
              @Body map:HashMap<String, String>):Call<Park>
 
-    @POST("main/vehicle/exit")
+    @POST("main/vehicle/exitByTicket")
     fun exit(@Header("Authorization") token: String,
              @Body map:HashMap<String, String>):Call<Exit>
 

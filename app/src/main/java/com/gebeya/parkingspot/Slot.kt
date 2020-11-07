@@ -1,10 +1,15 @@
 package com.gebeya.parkingspot
 
+import java.io.Serializable
+
+//what is returned for the "main/vehicle/getavailable" end point
 data class Slot(
     val _id:String,
     val status:StatuS,
-    val stack:String
-    )
+    val stack:String,
+    val created_at:String
+    ):Serializable
+
 
 data class StatuS(
     val statusName:List<String>,

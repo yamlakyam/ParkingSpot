@@ -61,99 +61,56 @@ class BookActivity : AppCompatActivity(), OnMapReadyCallback {
         sessionManager = SessionManager(this)
 
         val intent = intent
+        var parkingId=intent.getStringExtra("parkingLotId")
+        var parkingSlotId=intent.getStringExtra("slotId")
 
-        var near = intent.getSerializableExtra("data") as Nearest1
-        val id: String = near._id
-        val company: String = near.company.name
-        val status: String = near.full_status.toString()
-        price.text=near.price.toString()+" birr per minute"
-        // var slots=(intent.getStringArrayExtra("slots"))
-        //Toast.makeText(this,slots.toString(),Toast.LENGTH_LONG).show()
+        bookBtn.setOnClickListener {
+            val map = HashMap<String, String>()
+            map.put("parkingLotId", parkingId)
+            map.put("parkingSlotId",parkingSlotId)
 
-        var parkingId=intent.getStringExtra("id")
+            Toast.makeText(this,"$parkingId $parkingSlotId", Toast.LENGTH_LONG).show()
 
-        val map = HashMap<String, String>()
-        map.put("parkingLotId", parkingId)
-        var call = retrofitInterface!!.getslots("Bearer ${sessionManager.fetchAuthToken()}", map)
+            val call = retrofitInterface!!.park("Bearer ${sessionManager.fetchAuthToken()}", map)
+            call.enqueue(object :Callback<Park>{
 
-        call.enqueue(object : Callback<ArrayList<Slot>> {
-            override fun onFailure(call: Call<ArrayList<Slot>>, t: Throwable) {
-                Toast.makeText(this@BookActivity, t.message, Toast.LENGTH_LONG).show()
-            }
+                override fun onFailure(call: Call<Park>, t: Throwable) {
 
-            override fun onResponse(call: Call<ArrayList<Slot>>, response: Response<ArrayList<Slot>>) {
-                if (response.code()==200 && response.body()!=null) {
-                    resp = response.body()!!
-
-                    for(i in 0..resp.size-1){
-                        listOfslot.add(resp[i]._id)
-                    }
-                    //Toast.makeText(this@BookActivity,listOfslot.toString(), Toast.LENGTH_LONG).show()
-
-                    val adapter= ArrayAdapter<String>(this@BookActivity,R.layout.support_simple_spinner_dropdown_item,listOfslot)
-                    slotSpinner.adapter=adapter
-                    slotSpinner.onItemSelectedListener= object : AdapterView.OnItemSelectedListener{
-                        override fun onNothingSelected(parent: AdapterView<*>?) {
-
-                        }
-
-                        override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-
-                            slotSlected=parent!!.getItemAtPosition(position)
-                        }
-
-                    }
-
-
-                    bookBtn.setOnClickListener {
-                        val map = HashMap<String, String>()
-                        map.put("parkingLotId", parkingId)
-                        map.put("parkingSlotId",slotSlected.toString())
-                        var call = retrofitInterface!!.park("Bearer ${sessionManager.fetchAuthToken()}", map)
-                        call.enqueue(object :Callback<Park>{
-                            override fun onFailure(call: Call<Park>, t: Throwable) {
-                                Toast.makeText(this@BookActivity, t.message, Toast.LENGTH_LONG).show()
-                            }
-
-                            override fun onResponse(call: Call<Park>, response: Response<Park>
-                            ) {
-                                var resp1=response.body()!!._id
-                                sessionManager.saveTicket(resp1)
-                                Toast.makeText(this@BookActivity,"Reservation successful", Toast.LENGTH_LONG).show()
-                                startActivity(Intent(this@BookActivity,SpotListActivity::class.java))
-
-
-                            }
-                        })
-                    }
-
-                    cancelbtn.setOnClickListener {
-                        val map = HashMap<String, String>()
-                        map.put("ticketId", sessionManager.fetchTicket()!!)
-                        var call = retrofitInterface!!.exit("Bearer ${sessionManager.fetchAuthToken()}", map)
-                        call.enqueue(object :Callback<Exit>{
-                            override fun onFailure(call: Call<Exit>, t: Throwable) {
-                                Toast.makeText(this@BookActivity, t.message, Toast.LENGTH_LONG).show()
-                            }
-
-                            override fun onResponse(call: Call<Exit>, response: Response<Exit>
-                            ) {
-                                var respo=response.body()!!
-                                Toast.makeText(this@BookActivity, "Reservation Cancelled", Toast.LENGTH_LONG).show()
-                                startActivity(Intent(this@BookActivity,SpotListActivity::class.java))
-
-                            }
-                        })
-                    }
-
-
-                } else if (response.code() == 400) {
-
-                    Toast.makeText(this@BookActivity, "client error", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@BookActivity, t.message, Toast.LENGTH_LONG).show()
                 }
+                override fun onResponse(call: Call<Park>, response: Response<Park>) {
 
-            }
-        })
+                    if (response.code() == 200) {
+                        var resp1=response.body()!!._id
+                        sessionManager.saveTicket(response.body()!!._id)
+                        Toast.makeText(this@BookActivity," slot $parkingSlotId reservation successful", Toast.LENGTH_LONG).show()
+                        startActivity(Intent(this@BookActivity,TimerActivity::class.java))
+                    }
+                    else if (response.code() == 400) {
+                        Toast.makeText(this@BookActivity ,"Client Error ", Toast.LENGTH_LONG).show()
+                    }
+
+                }
+            })
+        }
+
+        cancelbtn.setOnClickListener {
+            val map = HashMap<String, String>()
+            map.put("ticketId", sessionManager.fetchTicket()!!)
+
+            var call = retrofitInterface!!.exit("Bearer ${sessionManager.fetchAuthToken()}", map)
+            call.enqueue(object :Callback<Exit>{
+                override fun onFailure(call: Call<Exit>, t: Throwable) {
+                    Toast.makeText(this@BookActivity, t.message, Toast.LENGTH_LONG).show()
+                }
+                override fun onResponse(call: Call<Exit>, response: Response<Exit>
+                ) {
+                    var respo=response.body()!!
+                    Toast.makeText(this@BookActivity, "Reservation Cancelled", Toast.LENGTH_LONG).show()
+                    startActivity(Intent(this@BookActivity,slotListActivity::class.java))
+                }
+            })
+        }
 
     }
 

@@ -106,28 +106,6 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/slotLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="0"
-                android:text="Slot"
-                android:textColor="#000000" />
-
-            <Spinner
-                android:id="@+id/slotSpinner"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:gravity="right" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="bottom"
             android:layout_marginTop="60dp"
