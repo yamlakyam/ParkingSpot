@@ -1,5 +1,6 @@
 package com.gebeya.parkingspot
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
@@ -118,7 +119,9 @@ class BookActivity : AppCompatActivity(), OnMapReadyCallback {
                             ) {
                                 var resp1=response.body()!!._id
                                 sessionManager.saveTicket(resp1)
-                                Toast.makeText(this@BookActivity, resp1.toString(), Toast.LENGTH_LONG).show()
+                                Toast.makeText(this@BookActivity,"Reservation successful", Toast.LENGTH_LONG).show()
+                                startActivity(Intent(this@BookActivity,SpotListActivity::class.java))
+
 
                             }
                         })
@@ -136,7 +139,8 @@ class BookActivity : AppCompatActivity(), OnMapReadyCallback {
                             override fun onResponse(call: Call<Exit>, response: Response<Exit>
                             ) {
                                 var respo=response.body()!!
-                                Toast.makeText(this@BookActivity, respo.toString(), Toast.LENGTH_LONG).show()
+                                Toast.makeText(this@BookActivity, "Reservation Cancelled", Toast.LENGTH_LONG).show()
+                                startActivity(Intent(this@BookActivity,SpotListActivity::class.java))
 
                             }
                         })
@@ -206,8 +210,6 @@ class BookActivity : AppCompatActivity(), OnMapReadyCallback {
         super.onSaveInstanceState(outState)
         mapView?.onSaveInstanceState(outState)
     }
-
-
 
 
 }

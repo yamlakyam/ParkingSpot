@@ -210,16 +210,6 @@ class HomeMapFragment : Fragment(), OnMapReadyCallback, PermissionsListener {
                 longitude= result.lastLocation?.longitude!!
                 val latLng = LatLng(latitude, longitude)
 
-                /*var bundle=Bundle()
-                bundle.putDouble("lat",latitude)
-                bundle.putDouble("long",longitude)
-                var frag=SpotListFragment()
-                frag.arguments=bundle
-
-                 */
-
-
-                // Toast.makeText(requireContext(), "Location update : $latLng", Toast.LENGTH_SHORT).show()
 
                 val params = HashMap<String, Double>()
                 params.put("longitude", longitude)
@@ -243,8 +233,6 @@ class HomeMapFragment : Fragment(), OnMapReadyCallback, PermissionsListener {
                             for(i in 0..resp.size-1){
                                 arrayListLoc.add(resp[i].location.coordinates)
                             }
-
-                            // Toast.makeText(requireContext(),"connected $arrayListLoc", Toast.LENGTH_LONG).show()
 
                             initAddMarker(mapboxMap)
                             //toasted the token to check if its working.

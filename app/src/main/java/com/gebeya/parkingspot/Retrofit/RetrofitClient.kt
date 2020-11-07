@@ -14,6 +14,8 @@ object RetrofitClient {
 
     //val BASE_URL = "http://192.168.1.5:3000"
     val BASE_URL = "https://parking-spot-finder-api.herokuapp.com"
+    //val BASE_URL = "http://car-api.car.et6da.gebeya.co"
+
 
     fun getInstance(): Retrofit {
         return if (retrofit == null) {
@@ -30,10 +32,4 @@ object RetrofitClient {
             retrofit!!
         }
     }
-
-
-
-
-
-
 }

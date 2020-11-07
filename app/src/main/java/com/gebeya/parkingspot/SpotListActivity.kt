@@ -75,7 +75,8 @@ class SpotListActivity : AppCompatActivity(), NearestAdapter.ClickedItem {
 
     override fun clickedSpot(nearest: Nearest1) {
         var callback:Callback<ArrayList<Slot>>
-        var intent= Intent(this, BookActivity::class.java)
+        //var intent= Intent(this, BookActivity::class.java)
+        var intent= Intent(this, slotListActivity::class.java)
         intent.putExtra("data",nearest)
         var parkingId=nearest._id
         //Toast.makeText(this, parkingId,Toast.LENGTH_LONG).show()
