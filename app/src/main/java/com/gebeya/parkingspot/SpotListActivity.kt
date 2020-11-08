@@ -77,9 +77,10 @@ class SpotListActivity : AppCompatActivity(), NearestAdapter.ClickedItem {
         var callback:Callback<ArrayList<Slot>>
         var intent= Intent(this, slotListActivity::class.java)
         var parkingId=nearest._id
+        var price=nearest.price
 
         intent.putExtra("id",parkingId)//trying to send the id first then do the ntk call on the other activity
-
+        intent.putExtra("price",price.toString())
 
         startActivity(intent)
     }

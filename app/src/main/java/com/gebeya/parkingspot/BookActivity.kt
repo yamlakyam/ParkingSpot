@@ -63,6 +63,9 @@ class BookActivity : AppCompatActivity(), OnMapReadyCallback {
         val intent = intent
         var parkingId=intent.getStringExtra("parkingLotId")
         var parkingSlotId=intent.getStringExtra("slotId")
+        var price=intent.getStringExtra("price")
+
+        priceValue.text=price+" birr per minute"
 
         bookBtn.setOnClickListener {
             val map = HashMap<String, String>()
