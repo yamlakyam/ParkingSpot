@@ -77,8 +77,14 @@ class PoHomeActivity : AppCompatActivity() {
         }
 
         parkBtn.setOnClickListener {
+            val intent1=Intent(this, PoSlotListActivity::class.java)
+            var plate_number=plateNo.text.toString()
+
             val intent = Intent(this, PoStackListActivity::class.java)
+            intent.putExtra("plate_number",plate_number)
             startActivity(intent)
+
+
         }
 
 

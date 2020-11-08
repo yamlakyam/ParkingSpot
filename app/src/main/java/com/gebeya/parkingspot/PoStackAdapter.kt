@@ -21,9 +21,8 @@ class PoStackAdapter(val stack: ArrayList<Stack>, var clickedItem: ClickedItem) 
         val stackk = stack.get(position)
         // var compnay:String=near.company
         // holder.bindData(nearest,position)
-        holder.stackId.text=stackk._id
-        holder.floorId.text=stackk.floor.toString()
-
+        //holder.stackId.text=stackk._id
+        holder.floorId.text="Floor "+stackk.floor.toInt().toString()
         holder.itemView.setOnClickListener {
             clickedItem.clickedSpot(stackk)
 
@@ -37,7 +36,7 @@ class PoStackAdapter(val stack: ArrayList<Stack>, var clickedItem: ClickedItem) 
 
 
     class StackViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
-        var stackId:TextView=itemView.findViewById(R.id.stackId)
+        //var stackId:TextView=itemView.findViewById(R.id.stackId)
         var floorId:TextView=itemView.findViewById(R.id.floorId)
 
     }

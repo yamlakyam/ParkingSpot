@@ -21,9 +21,12 @@ class PoStackListActivity : AppCompatActivity(),PoStackAdapter.ClickedItem {
     private var retrofit: Retrofit? = RetrofitClient.getInstance()
     private var retrofitInterface: MyService? = null
     private lateinit var sessionManager: SessionManager
+    private lateinit var plate_number: String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_po_stack_list)
+
+        plate_number=intent.getStringExtra("plate_number")
 
 
         retrofitInterface = retrofit!!.create(MyService::class.java)
@@ -68,6 +71,9 @@ class PoStackListActivity : AppCompatActivity(),PoStackAdapter.ClickedItem {
         var parkingLotId=stackk._id
 
         intent.putExtra("parkingLotId",parkingLotId)//trying to send the id first then do the ntk call on the other activity
+        intent.putExtra("plate_number",plate_number)
+
+
 
         startActivity(intent)
     }

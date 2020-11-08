@@ -13,7 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".PoSlotListActivity"></activity>
+        <activity android:name=".PoClearStack"></activity>
+        <activity android:name=".PoSlotListActivity" />
         <activity android:name=".PoStackListActivity" />
         <activity android:name=".PoParkActivity" />
         <activity android:name=".DetailInfoActivity" />
