@@ -33,6 +33,8 @@ class PoHomeActivity : AppCompatActivity() {
         retrofitInterface = retrofit!!.create(MyService::class.java)
         sessionManager = SessionManager(this)
 
+        poName.text="Parking Officer: ${sessionManager.fetchName()}"
+
         exitBtn.setOnClickListener {
             if (plateNo.text.toString().trim().length <5){
                 plateNo.error="Plate Number is a minimum of 5 characters"
@@ -100,8 +102,6 @@ class PoHomeActivity : AppCompatActivity() {
         clearBtn.setOnClickListener {
             startActivity(Intent(this, PoClearStackActivity::class.java))
         }
-
-
 
     }
 
