@@ -52,4 +52,7 @@ interface MyService {
     fun clearStack(@Header("Authorization") token: String,
                @Body map:HashMap<String, String>):Call<Stack>
 
+    @POST("main/getactivetickets")
+    fun getTicket(@Header("Authorization") token: String):Call<ArrayList<Ticket>>
+
 }

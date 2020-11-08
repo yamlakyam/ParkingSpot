@@ -156,7 +156,7 @@ class MainActivity : AppCompatActivity() {
                             intent.putExtra("email",email.text)
                             intent.putExtra("name",response.body()!!.name)
                             startActivity(intent)
-                            //finish()
+                            finish()
                         }
                         else if( sessionManager?.fetchRole()=="parking_officer"){
                             val intent = Intent(this@MainActivity, PoHomeActivity::class.java)

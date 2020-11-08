@@ -103,6 +103,10 @@ class PoHomeActivity : AppCompatActivity() {
             startActivity(Intent(this, PoClearStackActivity::class.java))
         }
 
+        ticketBtn.setOnClickListener {
+            startActivity(Intent(this, TicketListActivity::class.java))
+        }
+
     }
 
 }
