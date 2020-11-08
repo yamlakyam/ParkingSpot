@@ -48,4 +48,8 @@ interface MyService {
     fun poPark(@Header("Authorization") token: String,
                @Body map:HashMap<String, String>):Call<Park>
 
+    @POST("main/clearStack")
+    fun clearStack(@Header("Authorization") token: String,
+               @Body map:HashMap<String, String>):Call<Stack>
+
 }

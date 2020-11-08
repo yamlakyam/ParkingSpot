@@ -26,7 +26,6 @@ class PoStackAdapter(val stack: ArrayList<Stack>, var clickedItem: ClickedItem) 
         holder.itemView.setOnClickListener {
             clickedItem.clickedSpot(stackk)
 
-
         }
 
     }

@@ -28,7 +28,8 @@ data class PoResponse(val _id: String,
 
 data class Stack(val floor:Double,
                  val _id:String,
-                 val company:String)
+                 val company:String,
+                 val slots:Int)
 
 
 

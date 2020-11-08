@@ -77,6 +77,17 @@ class PoHomeActivity : AppCompatActivity() {
         }
 
         parkBtn.setOnClickListener {
+            if (plateNo.text.toString().trim().isEmpty()) {
+                plateNo.error = "Plate Number Required"
+                plateNo.requestFocus()
+                return@setOnClickListener
+            }
+            if (plateNo.text.toString().trim().length <5){
+                plateNo.error="Plate Number is a minimum of 5 characters"
+                plateNo.requestFocus()
+                return@setOnClickListener
+            }
+
             val intent1=Intent(this, PoSlotListActivity::class.java)
             var plate_number=plateNo.text.toString()
 
@@ -84,7 +95,10 @@ class PoHomeActivity : AppCompatActivity() {
             intent.putExtra("plate_number",plate_number)
             startActivity(intent)
 
+        }
 
+        clearBtn.setOnClickListener {
+            startActivity(Intent(this, PoClearStackActivity::class.java))
         }
 
 
