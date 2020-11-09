@@ -35,11 +35,6 @@ class CreateAccountActivity : AppCompatActivity() {
                 name_reg.requestFocus()
                 return@setOnClickListener
             }
-            if (email_reg.text.toString().trim().isEmpty()) {
-                email_reg.error = "Email Required"
-                email_reg.requestFocus()
-                return@setOnClickListener
-            }
             if (phone_reg.text.toString().trim().isEmpty()) {
                 phone_reg.error = "Phone Number Required"
                 phone_reg.requestFocus()
@@ -54,6 +49,11 @@ class CreateAccountActivity : AppCompatActivity() {
             if(plate_number.text.toString().length!=5){
                 plate_number.error="Plate Number must be five digits"
                 plate_number.requestFocus()
+                return@setOnClickListener
+            }
+            if (email_reg.text.toString().trim().isEmpty()) {
+                email_reg.error = "Email Required"
+                email_reg.requestFocus()
                 return@setOnClickListener
             }
             if (password_reg.text.toString().trim().isEmpty()) {
