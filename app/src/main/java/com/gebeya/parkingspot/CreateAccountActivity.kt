@@ -45,6 +45,17 @@ class CreateAccountActivity : AppCompatActivity() {
                 phone_reg.requestFocus()
                 return@setOnClickListener
             }
+            if(plate_number.text.toString().trim().isEmpty()){
+            plate_number.error="Plate Number Required"
+            plate_number.requestFocus()
+            return@setOnClickListener
+            }
+
+            if(plate_number.text.toString().length!=5){
+                plate_number.error="Plate Number must be five digits"
+                plate_number.requestFocus()
+                return@setOnClickListener
+            }
             if (password_reg.text.toString().trim().isEmpty()) {
                 password_reg.error = "Password Required"
                 password_reg.requestFocus()
@@ -55,13 +66,9 @@ class CreateAccountActivity : AppCompatActivity() {
                 confirm_password_reg.requestFocus()
                 return@setOnClickListener
             }
-            if(plate_number.text.toString().length!=5){
-                plate_number.error="Plate Number must be five digits"
-                plate_number.requestFocus()
-                return@setOnClickListener
-            }
+
             if (password_reg.text.toString().trim().length <8 && !(isValidPassword(password_reg.text.toString().trim()))){
-                password_reg.error="Password must be length of 8 digits and a strong one"
+                password_reg.error="Password must be minuimum length of 8 charcters"
                 password_reg.requestFocus()
                 return@setOnClickListener
             }
