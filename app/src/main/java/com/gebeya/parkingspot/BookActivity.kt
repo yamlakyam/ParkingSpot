@@ -79,7 +79,9 @@ class BookActivity : AppCompatActivity(), OnMapReadyCallback {
 
                 override fun onFailure(call: Call<Park>, t: Throwable) {
 
-                    Toast.makeText(this@BookActivity, t.message, Toast.LENGTH_LONG).show()
+                    //Toast.makeText(this@BookActivity, t.message, Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@BookActivity, "Network problem", Toast.LENGTH_LONG).show()
+
                 }
                 override fun onResponse(call: Call<Park>, response: Response<Park>) {
 

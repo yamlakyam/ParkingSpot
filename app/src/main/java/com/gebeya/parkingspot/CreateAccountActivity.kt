@@ -101,7 +101,7 @@ class CreateAccountActivity : AppCompatActivity() {
 
                     override fun onFailure(call: Call<Void>, t: Throwable) {
                         Toast.makeText(
-                            this@CreateAccountActivity, t.message,
+                            this@CreateAccountActivity,"Network Failure",
                             Toast.LENGTH_LONG
                         ).show()
                     }

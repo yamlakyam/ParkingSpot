@@ -37,7 +37,7 @@ class PoClearStackActivity : AppCompatActivity(),PoStackAdapter.ClickedItem{
         var call = retrofitInterface!!.getstack("Bearer ${sessionManager.fetchAuthToken()}")
         call.enqueue(object : Callback<ArrayList<Stack>> {
             override fun onFailure(call: Call<ArrayList<Stack>>, t: Throwable) {
-                Toast.makeText(this@PoClearStackActivity, t.message, Toast.LENGTH_LONG).show()
+                Toast.makeText(this@PoClearStackActivity, "Network Failure", Toast.LENGTH_LONG).show()
             }
 
             override fun onResponse(call: Call<ArrayList<Stack>>, response: Response<ArrayList<Stack>>) {
@@ -63,7 +63,7 @@ class PoClearStackActivity : AppCompatActivity(),PoStackAdapter.ClickedItem{
         var call = retrofitInterface!!.clearStack("Bearer ${sessionManager.fetchAuthToken()}",map)
         call.enqueue(object : Callback<Stack> {
             override fun onFailure(call: Call<Stack>, t: Throwable) {
-                Toast.makeText(this@PoClearStackActivity, t.message, Toast.LENGTH_LONG).show()
+                Toast.makeText(this@PoClearStackActivity, "Network Failure", Toast.LENGTH_LONG).show()
             }
 
             override fun onResponse(call: Call<Stack>, response: Response<Stack>) {

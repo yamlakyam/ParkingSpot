@@ -14,7 +14,7 @@
     <fragment
         android:id="@+id/nav_history"
         android:name="com.gebeya.parkingspot.ui.gallery.GalleryFragment"
-        android:label="History"
+        android:label="Terms and Conditions"
         tools:layout="@layout/fragment_gallery" />
 
     <fragment

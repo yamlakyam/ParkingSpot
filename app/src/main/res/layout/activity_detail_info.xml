@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Slot"
-            android:textColor="#8024AA" />
+            android:textColor="#8E24AA" />
 
         <TextView
             android:id="@+id/slotDet"
@@ -52,7 +52,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Plate Number"
-            android:textColor="#8024AA" />
+            android:textColor="#8E24AA" />
 
         <TextView
             android:id="@+id/plateNoDet"
@@ -76,7 +76,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Started at"
-            android:textColor="#8024AA" />
+            android:textColor="#8E24AA" />
 
         <TextView
             android:id="@+id/startedDet"
@@ -102,7 +102,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Exited at"
-            android:textColor="#8024AA" />
+            android:textColor="#8E24AA" />
 
         <TextView
             android:id="@+id/exitTimeDet"
@@ -126,7 +126,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Total Price"
-            android:textColor="#8024AA" />
+            android:textColor="#8E24AA" />
 
         <TextView
             android:id="@+id/totalPriceDet"

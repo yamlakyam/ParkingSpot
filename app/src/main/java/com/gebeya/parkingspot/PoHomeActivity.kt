@@ -54,7 +54,7 @@ class PoHomeActivity : AppCompatActivity() {
 
             call.enqueue(object : Callback<PoResponse> {
                 override fun onFailure(call: Call<PoResponse>, t: Throwable) {
-                    Toast.makeText(this@PoHomeActivity, t.message, Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@PoHomeActivity, "Network Failure", Toast.LENGTH_LONG).show()
 
                 }
 

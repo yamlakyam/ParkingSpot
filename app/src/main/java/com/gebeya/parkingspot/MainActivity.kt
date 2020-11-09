@@ -191,7 +191,7 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-                    Toast.makeText(this@MainActivity, t.message, Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@MainActivity, "Network Failure", Toast.LENGTH_LONG).show()
                     progressB.isVisible=false
                 }
             })

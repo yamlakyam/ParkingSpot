@@ -151,7 +151,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_weight="1"
-                android:background="#8024AA"
+                android:background="#8E24AA"
                 android:text="Book"
                 android:textColor="#FFFFFF" />
         </LinearLayout>

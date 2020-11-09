@@ -45,7 +45,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_weight="1"
-                android:background="#8024AA"
+                android:background="#8E24AA"
                 android:text="Park"
                 android:textAllCaps="false"
                 android:textColor="#FFFFFF" />
@@ -57,7 +57,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_weight="1"
-                android:background="#8024AA"
+                android:background="#8E24AA"
                 android:text="Exit"
                 android:textAllCaps="false"
                 android:textColor="#FFFFFF" />
@@ -76,7 +76,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_weight="1"
-                android:background="#8024AA"
+                android:background="#8E24AA"
                 android:text="Tickets"
                 android:textAllCaps="false"
                 android:textColor="#FFFFFF" />
@@ -88,7 +88,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_weight="1"
-                android:background="#8024AA"
+                android:background="#8E24AA"
                 android:text="Clear Stack"
                 android:textAllCaps="false"
                 android:textColor="#FFFFFF" />

@@ -105,7 +105,7 @@ class DisplayMapsActivity : AppCompatActivity(), OnMapReadyCallback, Permissions
                         .tilt(10.0)
                         .build()
                     map.animateCamera(CameraUpdateFactory.newCameraPosition(position))
-                    Toast.makeText(this@DisplayMapsActivity, "Location update : $latLng", Toast.LENGTH_SHORT).show()
+                    //Toast.makeText(this@DisplayMapsActivity, "Location update : $latLng", Toast.LENGTH_SHORT).show()
                 }
             }
 
