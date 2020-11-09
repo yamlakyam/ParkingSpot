@@ -72,7 +72,7 @@ class BookActivity : AppCompatActivity(), OnMapReadyCallback {
             map.put("parkingLotId", parkingId)
             map.put("parkingSlotId",parkingSlotId)
 
-            Toast.makeText(this,"$parkingId $parkingSlotId", Toast.LENGTH_LONG).show()
+           // Toast.makeText(this,"$parkingId $parkingSlotId", Toast.LENGTH_LONG).show()
 
             val call = retrofitInterface!!.park("Bearer ${sessionManager.fetchAuthToken()}", map)
             call.enqueue(object :Callback<Park>{
@@ -86,11 +86,11 @@ class BookActivity : AppCompatActivity(), OnMapReadyCallback {
                     if (response.code() == 200) {
                         var resp1=response.body()!!._id
                         sessionManager.saveTicket(response.body()!!._id)
-                        Toast.makeText(this@BookActivity," slot $parkingSlotId reservation successful", Toast.LENGTH_LONG).show()
+                        Toast.makeText(this@BookActivity," slot reservation successful", Toast.LENGTH_LONG).show()
                         startActivity(Intent(this@BookActivity,TimerActivity::class.java))
                     }
                     else if (response.code() == 400) {
-                        Toast.makeText(this@BookActivity ,"Client Error ", Toast.LENGTH_LONG).show()
+                        Toast.makeText(this@BookActivity ,"You have already parked", Toast.LENGTH_LONG).show()
                     }
 
                 }
@@ -98,21 +98,9 @@ class BookActivity : AppCompatActivity(), OnMapReadyCallback {
         }
 
         cancelbtn.setOnClickListener {
-            val map = HashMap<String, String>()
-            map.put("ticketId", sessionManager.fetchTicket()!!)
+           // startActivity(Intent(this@BookActivity,slotListActivity::class.java))
+            finish()
 
-            var call = retrofitInterface!!.exit("Bearer ${sessionManager.fetchAuthToken()}", map)
-            call.enqueue(object :Callback<Exit>{
-                override fun onFailure(call: Call<Exit>, t: Throwable) {
-                    Toast.makeText(this@BookActivity, t.message, Toast.LENGTH_LONG).show()
-                }
-                override fun onResponse(call: Call<Exit>, response: Response<Exit>
-                ) {
-                    var respo=response.body()!!
-                    Toast.makeText(this@BookActivity, "Reservation Cancelled", Toast.LENGTH_LONG).show()
-                    startActivity(Intent(this@BookActivity,slotListActivity::class.java))
-                }
-            })
         }
 
     }

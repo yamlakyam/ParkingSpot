@@ -36,6 +36,11 @@ class PoHomeActivity : AppCompatActivity() {
         poName.text="Parking Officer: ${sessionManager.fetchName()}"
 
         exitBtn.setOnClickListener {
+            if (plateNo.text.toString().trim().isEmpty()) {
+                plateNo.error = "Plate Number Required"
+                plateNo.requestFocus()
+                return@setOnClickListener
+            }
             if (plateNo.text.toString().trim().length <5){
                 plateNo.error="Plate Number is a minimum of 5 characters"
                 plateNo.requestFocus()

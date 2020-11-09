@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import com.gebeya.parkingspot.Retrofit.MyService
 import com.gebeya.parkingspot.Retrofit.RetrofitClient
 import kotlinx.android.synthetic.main.activity_create_account.*
@@ -74,6 +75,7 @@ class CreateAccountActivity : AppCompatActivity() {
 
 
             if (map["password"] == confirm_password_reg.text.toString()) {
+                progressB_CA.isVisible=true
                 val call: Call<Void> = retrofitInterface!!.executeSignup(map)
 
                 call.enqueue(object : Callback<Void> {
@@ -81,6 +83,7 @@ class CreateAccountActivity : AppCompatActivity() {
                         if (response.code() == 200) {
 
                             Toast.makeText(this@CreateAccountActivity, "Signed Up successfully", Toast.LENGTH_LONG).show()
+
                             var intent= Intent(this@CreateAccountActivity,MainActivity::class.java)
                             startActivity(intent)
                         } else if (response.code() == 400) {

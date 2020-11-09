@@ -53,11 +53,11 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
-        else if(sessionManager?.fetchPassword()!=null && sessionManager?.fetchPassword()!=null && sessionManager?.fetchRole()=="parking_officer"){
+        /*else if(sessionManager?.fetchPassword()!=null && sessionManager?.fetchPassword()!=null && sessionManager?.fetchRole()=="parking_officer"){
             val intent = Intent(this@MainActivity, PoHomeActivity::class.java)
             startActivity(intent)
             //finish()
-        }
+        }*/
 
 
 
@@ -156,24 +156,28 @@ class MainActivity : AppCompatActivity() {
                             intent.putExtra("email",email.text)
                             intent.putExtra("name",response.body()!!.name)
                             startActivity(intent)
+                            progressB.isVisible=false
                             finish()
                         }
                         else if( sessionManager?.fetchRole()=="parking_officer"){
                             val intent = Intent(this@MainActivity, PoHomeActivity::class.java)
                             startActivity(intent)
+                            progressB.isVisible=false
                             //finish()
                         }
 
                         if(response.body()!!.roles[0]=="user"){
                             val intent = Intent(this@MainActivity, HomeActivity::class.java)
                             startActivity(intent)
+                            progressB.isVisible=false
                             finish()
                         }
 
                         else if(response.body()!!.roles[0]=="parking_officer"){
                             val intent = Intent(this@MainActivity, PoHomeActivity::class.java)
                             startActivity(intent)
-                            //finish()
+                            progressB.isVisible=false
+                            finish()
                         }
 
 
@@ -195,10 +199,12 @@ class MainActivity : AppCompatActivity() {
         registration_link.setOnClickListener {
             val intent = Intent(this, CreateAccountActivity::class.java)
             startActivity(intent)
+            progressB.isVisible=false
         }
         forgotpw.setOnClickListener {
             val intent = Intent(this, ForgotPasswordActivity::class.java)
             startActivity(intent)
+            progressB.isVisible=false
         }
 
 

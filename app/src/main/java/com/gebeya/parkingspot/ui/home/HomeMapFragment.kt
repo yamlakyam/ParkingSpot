@@ -95,7 +95,6 @@ class HomeMapFragment : Fragment(), OnMapReadyCallback, PermissionsListener {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         sessionManager.logout()
-
         return item!!.onNavDestinationSelected(findNavController())||super.onOptionsItemSelected(item)
 
     }
@@ -209,6 +208,8 @@ class HomeMapFragment : Fragment(), OnMapReadyCallback, PermissionsListener {
                 latitude = result.lastLocation?.latitude!!
                 longitude= result.lastLocation?.longitude!!
                 val latLng = LatLng(latitude, longitude)
+
+
 
 
                 val params = HashMap<String, Double>()
