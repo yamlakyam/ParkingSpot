@@ -117,19 +117,7 @@ class HomeMapFragment : Fragment(), OnMapReadyCallback, PermissionsListener {
 
     private fun initAddMarker(map: MapboxMap) {
         val symbolLayers = ArrayList<Feature>()
-        // symbolLayers.add(Feature.fromGeometry(Point.fromLngLat(38.0, 9.9)))
-        // symbolLayers.add(Feature.fromGeometry(Point.fromLngLat(38.4, 8.0)))
 
-
-        /* val myArrayList = ArrayList<List<Double>>()
-         myArrayList.add(listOf(39.0,8.6))
-         myArrayList.add(listOf(38.7,9.6))
-         */
-
-        /*for(i in myArrayList)
-            symbolLayers.add(Feature.fromGeometry(Point.fromLngLat(i[0],i[1])))
-        */
-        //Toast.makeText(requireContext(),"$arrayListLoc[0]",Toast.LENGTH_LONG).show()
 
         for(i in arrayListLoc)
             symbolLayers.add(Feature.fromGeometry(Point.fromLngLat(i[0],i[1])))

@@ -96,7 +96,7 @@ class PoSlotListActivity : AppCompatActivity(), PoSlotAdapter.ClickedItem {
                     sessionManager.saveTicket(response.body()!!._id)
                     Toast.makeText(
                         this@PoSlotListActivity,
-                        " slot ${resp1.slot_id} reserved to ${resp1.plate_number} successfully",
+                        " slot reserved to ${resp1.plate_number} successfully",
                         Toast.LENGTH_LONG
                     ).show()
                 } else if (response.code() == 400) {

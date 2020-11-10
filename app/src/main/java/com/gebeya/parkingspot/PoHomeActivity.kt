@@ -1,6 +1,7 @@
 package com.gebeya.parkingspot
 
 import android.R
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
@@ -18,6 +19,13 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
+import java.math.BigDecimal
+import java.math.RoundingMode
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.HashMap
+import kotlin.math.round
+import kotlin.math.roundToLong
 
 
 class PoHomeActivity : AppCompatActivity() {
@@ -58,6 +66,7 @@ class PoHomeActivity : AppCompatActivity() {
 
                 }
 
+                @SuppressLint("SimpleDateFormat")
                 override fun onResponse(call: Call<PoResponse>, response: Response<PoResponse>) {
                     if (response.code() == 200 ) {
                         var resp = response.body()!!
@@ -65,9 +74,24 @@ class PoHomeActivity : AppCompatActivity() {
                         var intent= Intent(this@PoHomeActivity, DetailInfoActivity::class.java)
                         intent.putExtra("slotId",resp.slot_id)
                         intent.putExtra("plateNumber",resp.plate_number)
-                        intent.putExtra("parkAt",resp.park_at)
-                        intent.putExtra("exitAt",resp.exit_at)
-                        intent.putExtra("total",resp.total_price)
+                        //intent.putExtra("parkAt",resp.park_at)
+                        //intent.putExtra("exitAt",resp.exit_at)
+                       // intent.putExtra("total",resp.total_price)
+                        //round(this * multiplier) / multiplier
+                      // intent.putExtra("total",round(resp.total_price * 10.0) / 10.0)
+                       intent.putExtra("total",round(resp.total_price * 100) / 100)
+                        //intent.putExtra("total",BigDecimal(resp.total_price).setScale(2, RoundingMode.HALF_EVEN))
+                        val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault())
+                        val date1 = dateFormat.parse(resp.park_at)
+                        val date2 = dateFormat.parse(resp.exit_at)
+                        val formatter = SimpleDateFormat("HH:mm:ss") //If you need time just put specific format for time like ‘HH:mm:ss’
+                        val parkat = formatter.format(date1)
+                        val exitat = formatter.format(date2)
+
+                        intent.putExtra("parkAt",parkat)
+                        intent.putExtra("exitAt",exitat)
+
+
                         startActivity(intent)
 
 

@@ -14,7 +14,7 @@ class DetailInfoActivity : AppCompatActivity() {
         plateNoDet.text=intent.getStringExtra("plateNumber")
         startedDet.text=intent.getStringExtra("parkAt")
         exitTimeDet.text=intent.getStringExtra("exitAt")
-        totalPriceDet.text= intent.getDoubleExtra("total", 0.0).toString()
+        totalPriceDet.text= intent.getDoubleExtra("total", 0.0).toString()+" birr"
 
     }
 }

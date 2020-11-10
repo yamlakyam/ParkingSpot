@@ -207,10 +207,6 @@ class MainActivity : AppCompatActivity() {
             progressB.isVisible=false
         }
 
-
-
-
-
     }
 
     private fun signIn() {
